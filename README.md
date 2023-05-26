@@ -47,10 +47,10 @@ Use Draft option in preamble:
 
 Example: \documentclass[draft]{asmarticle} 
 
-## Sample Double-Blind PDF Generation
+## Sample Double-Anonymous PDF Generation
 
 
-Use DoubleBlind option in preamble:
+Use DoubleBlind option in preamble to subpress author information:
 
 Example: \documentclass[DoubleBlind]{asmarticle}
 
