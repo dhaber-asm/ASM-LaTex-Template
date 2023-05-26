@@ -1,0 +1,192 @@
+\documentclass[draft]{t:/pgn/templates/asm/sample/clisam/template/asmarticle}
+
+
+%%%%\GeneralInstruction%%%%Hide this command if General Template Instruction not in the PDF output.
+
+\title{\LaTeX\ template for research and review papers in ASM journals}
+
+\author{First Author,\afn{1} Second Author,\afn{2} Third Author,\afn{3} Fourth Author\afn{1,2*}}
+
+\affil{Division, Department, University Name, City, State or Province, Country}
+\affil{Company Name, City, State or Province, Country}
+\affil{Department, Institution Name, City, State or Province, Country}
+
+\corraddress{Address correspondence to Fourth Author, fourthauthor@institution.edu.}
+\presentaddress{Present address: Second Author, Current Affiliation, City, State or Province, Country.
+
+First Author and Second Author contributed equally to this work. Author order was determined by XXXX.
+
+Third Author and Fourth Author are co-senior authors.
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}%
+Different article types have different formatting requirements and not all variations are captured in this template. Refer to the \href{https://journals.asm.org/links-to-journal-author-instructions}{\underline{specific instructions for individual journals}}, especially the pages on the Submission and Review Process and Article Types, to understand the relevant formatting elements.
+
+
+The Abstract (called Summary in CMR and MMBR reviews) should concisely summarize the basic content of the paper without presenting extensive experimental details. Because it will be published separately by abstracting services, it must be complete and understandable without reference to the text. Avoid abbreviations and references; if it is essential to include a reference, use the format shown under \href{https://journals.asm.org/references}{\underline{``Citations in abstracts'' here}}. Limit of 250 words for full-length texts and research articles, resource reports, methods and protocols, observations, reviews, and minireviews; 150 words for opinion/hypothesis papers; and 75 words for JVI gems and AAC short forms; new-data letters do not have abstracts.  
+
+\begin{importance}%
+Some article types require an Importance section, which provides a nontechnical explanation of the significance of the study to the field. These types are full-length texts in AEM, IAI, and JVI, research articles, resource reports, methods and protocols, and observations. The limit is $\leq$150 words, except for full-length texts in IAI, where it should be $\leq$120 words.
+\end{importance}
+\end{abstract}
+
+\section{INTRODUCTION}
+	The introductory portion should supply sufficient background information to allow the reader to grasp the focus or rationale of your paper, understand the hypothesis you address, and evaluate the results of the study without referring to previous publications on the topic.
+
+\subsection{\LaTeX\ files}
+	Files from a project may be transferred directly to a selected ASM journal once for initial manuscript submission. A compiled PDF alone is acceptable for initial submission of a manuscript prepared in \LaTeX; refer to the \href{https://journals.asm.org/initial-submission-checklist}{\underline{Initial Submission Checklist}} for more details. At the revision stage, ASM requires all \LaTeX\ files from a project to be uploaded. On the journal submission site, the .tex file should be classified as a Manuscript Text File. Other supporting files that appear in the package (i.e., .bib, .bst, .cls, .ldf, and .sty files) should all be included and classified as \LaTeX\ Support Files. Figures should be classified as Figure files; see the \href{https://journals.asm.org/figures-tables}{\underline{guidance for figures}} for formatting requirements. At the revision stage, when the manuscript record already exists, any files requiring modification must be replaced. Contact \href{https://journals.asm.org/contact-us}{\underline{journal staff}} with questions related to file conversion in the manuscript record.
+
+\section{Sectioning commands}
+	Use \verb|\section|\ to get a first-level heading. You can use \verb|\subsection| or just \verb|\textbf| to get a subheading. Further sectioning levels, such as \verb|\subsubsection|, are ignored. First-level heads (boldface, all caps) for the Materials and Methods, Results, and Discussion sections are required only in full-length texts, research articles, resource reports, and methods and protocols. 
+
+\subsection{Reviews, minireviews, and Gems}
+	Reviews, minireviews, and Gems may have specific length limits and, for some journals, may be submitted by invitation only. Refer to the \href{https://journals.asm.org/links-to-journal-author-instructions}{\underline{specific instructions for individual journals}}, especially the pages on the Submission and Review Process and Article Types, for details. Instead of Materials and Methods, Results, and Discussion, these papers typically have first-level heads (boldface, all caps) delineating the desired major sections, as well as subsection heads as needed. Brief biographies of the authors and author photos may be included at the end of the manuscript (see the end of this template for more information). 
+
+\subsection{Citations and references}
+	This template uses BibTeX and natbib, so \verb|\citep| and \verb|\citet| such as \verb|\citep{caserta:etal:2012}|, \verb|\citet{johnson:robinson:2016}| can be used as usual to produce the correct citation style, and the reference list is generated automatically. In the References list, references are numbered in the order in which they are cited in the article (citation-sequence reference system). In the text, references are cited parenthetically by number in sequential order. Data that are not published or not peer reviewed are simply cited parenthetically in the text. For additional guidelines and examples, see \href{https://journals.asm.org/references}{\underline{this page}}. 
+
+\section{MATERIALS AND METHODS}
+	The materials and methods section in primary-research papers should include sufficient technical information to allow the experiments to be repeated. 
+
+\subsection{Math and equations}
+	Equations can be presented either inline in the text or as centered display equations, with or without numbering:
+\begin{verbatim}
+\begin{equation}
+\frac{\partial^2 \Phi}{\partial x^2} + \frac{\partial^2 \Phi}{\partial y^2} +
+            \frac{\partial^2 \Phi}{\partial z^2} =
+            \frac{1}{c^2}\frac{\partial^2\Phi}{\partial t^2}
+\end{equation}
+\end{verbatim}
+	Please note that display equations in the template may be rendered with
+a slightly different presentation in the final published ASM journal article.
+\begin{verbatim}
+\begin{equation}
+\int_0^\infty e^{-\alpha x^2} \mathrm{d}x =
+            \frac12\sqrt{\int_{-\infty}^\infty e^{-\alpha x^2}}
+            \mathrm{d}x\int_{-\infty}^\infty e^{-\alpha y^2}\mathrm{d}y =
+            \frac12\sqrt{\frac{\pi}{\alpha}}
+\end{equation}
+\end{verbatim}
+
+\section{RESULTS}
+	In the Results section, include the rationale or design of the experiments as well as the results; reserve extensive interpretation of the results for the Discussion section. For shorter research papers, these two sections can be combined under a single "RESULTS AND DISCUSSION" first-level head. 
+
+\subsection{Figures}
+
+	On initial submission, figures and legends should be embedded in the text near where they are cited, to assist review. Here is an example of a figure citation (Fig. 1).
+
+\begin{figure}
+\centering{\includegraphics[scale=2]{fpo.jpg}}
+\caption{This is an example figure with caption. Include each figure and its legend within the manuscript near where it is cited in the text.} \end{figure}
+
+	At the modification stage, separate production quality digital files must be provided for figures, and legends should appear after the References section in the main text. See the \href{https://journals.asm.org/figures-tables}{\underline{guidance for figures}} for formatting requirements. All graphics submitted with modified manuscripts should be grayscale or in the RGB color mode and should be at their intended publication size. 
+
+\subsection{Tables}
+	The tabularx, booktabs, and siunitx packages are loaded by asm-article.cls; see \verb|\autoref{tab:example}| for an example table. Use \verb|\verb||\verb|\begin{fullwidth}...\end{fullwidth}|| in your table for the table to span the entire width of the page. Shading in the field of tables is allowed, to demonstrate relationships among data. You can use the \verb|\verb||\verb|\columncolor||, \verb|\verb||\verb|\rowcolor||, or \verb|\verb||\verb|\cellcolor|| commands to do this: allowed color values are \verb|\verb||\verb|black!20|| and \verb|\verb||\verb|black!30||. Here is an example (Table 1).
+
+\begin{table}
+\caption{Automobile land speed records (GR 5-10)$^a$}%
+\tabcolsep=7.5pt\noindent\begin{tabular*}{\textwidth}{@{\extracolsep\fill\hskip\tabcolsep}lp{5pc}>{\raggedright}p{6pc}>{\columncolor{black!20}}llp{8pc}<{\raggedright}@{\hskip\tabcolsep\extracolsep\fill}}\hline
+\rowcolor{black!20}\textbf{Speed} &  & & & & \textbf{Extra}\\
+\rowcolor{black!20}\textbf{(mph)} & \textbf{Driver} & \textbf{Car} & \textbf{Engine} & \textbf{Date} & \textbf{comments}\\\hline
+407.447 & Craig Breedlove & Spirit of America & GE J47    & 8/5/63 & (Just to demo a full-width table with auto-wrapping long lines)\\
+413.199 & Tom Green       & Wingfoot Express  &\cellcolor{black!30} WE J46    & 10/2/64 & \\
+434.22  & Art Arfons      & Green Monster     & GE J79    & 10/5/64 & \\
+526.277 & Craig Breedlove & Spirit of America & GE J79    & 10/15/64 & \\
+536.712 & Art Arfons      & Green Monster     & GE J79    & 10/27/65 & \\
+622.407 & Gary Gabelich   & Blue Flame        & Rocket    & 10/23/70 & \\
+633.468 & Richard Noble   & Thrust 2	      &\cellcolor{black!30} RR RG 146 &\cellcolor{black!20} 10/4/83  & \\
+763.468 & Andy Green      & Thrust SSc	      &\cellcolor{black!30} RR Spey   &\cellcolor{black!20} 10/15/97 & \\\hline
+\end{tabular*}%
+\begin{tablenotes}%
+\item[a]Table adapted from \burl{https://www.sedl.org/afterschool/toolkits/science/pdf/ast\_sci\_data\_tables\_sample.pdf} with permission.
+\end{tablenotes}
+%$^a$Table adapted from \burl{https://www.sedl.org/afterschool/toolkits/science/pdf/ast\_sci\_data\_tables\_sample.pdf} with permission.
+\end{table}
+
+
+\subsection{Permission to use copyrighted material}
+	Authors are responsible for acquiring all necessary permissions related to reusing, adapting, or modifying copyrighted material from other sources and uploading these permissions as additional files during manuscript submission or otherwise forwarding them to ASM Journals staff. Proper attribution for any such material must be provided in the manuscript. 
+
+\section{DISCUSSION}
+	The Discussion section should provide an interpretation of the results in relation to previously published work and to the experimental system at hand and should not contain extensive repetition of the Results section or reiteration of the introduction. In shorter research papers, the Results and Discussion sections may be combined.
+
+\begin{acknowledgments}
+\section{ACKNOWLEDGMENTS}
+	Statements regarding sources of direct financial support (e.g., grants, fellowships, scholarships, etc.), personal assistance, or contributor roles appear in this section.
+
+Use \verb|\begin{acknowledgments}...\end{acknowledgments}| environment to place your acknowledgments section, commands to do this: output will not come in the pdf for double blind mode.
+\end{acknowledgments}
+
+
+\section{DATA AVAILABILITY STATEMENT}
+	Per ASM's \href{https://journals.asm.org/open-data-policy}{\underline{open data policy}}, a condition of publication in ASM journals is that authors make data fully available and without restriction, except in rare circumstances. Data availability will be confirmed prior to publication and must be provided during the modification stage, if not before. Upon request, data must also be made available for peer review. Include a data availability statement that contains a description of the data, name of the repository, and digital object identifiers (DOIs) or accession numbers.
+
+\section{CLINICAL TRIALS}
+	Add clinical trial registry name and number here, if applicable.
+
+\section{ETHICS APPROVAL}
+	Provide an ethics approval statement for your study here, if applicable. 
+
+\begin{funding}
+\section{FUNDING}
+	Add funding info here: funder name, grant number, and name of recipient author. 
+
+Use \verb|\begin{funding}...\end{funding}| environment to place your funding section, commands to do this: output will not come in the pdf for double blind mode.
+\end{funding}
+
+\begin{conflictsinterest}
+\section{CONFLICTS OF INTEREST}
+	State all conflicts of interest here or say, ``The authors declare no conflict of interest.''
+
+Use \verb|\begin{conflictsinterest}...\end{conflictsinterest}| environment to place your conflicts of interest section, commands to do this: output will not come in the pdf for double blind mode.
+\end{conflictsinterest}
+
+
+\subsection{Supplemental material}
+	If you have \href{https://journals.asm.org/supplemental-material}{\underline{supplemental material}} intended for posting by ASM, cite it in the manuscript but do NOT include the file(s) or legends in this template. Instead, in the journal submission portal, upload supplemental material separate from the main manuscript file(s) as either a single PDF (preferred) or individual files, with legends included in said file(s). References related only to the supplemental material should be included within the supplemental file(s) rather than in the References section of the main paper.
+
+\section{REFERENCES}
+\begin{verbatim}
+asm-sample.bib goes here.
+@article{caserta:etal:2012,
+  author = {Caserta, E. and Haemig, H. A. H. and Manias, D. A. and Tomsic, J. and Grundy, 
+  F. J. and Henkin, T. M. and Dunny, G.M.},
+  title = {\emph{In vivo} and \emph{in vitro} analyses of regulation of the 
+  pheromone-responsive \emph{prgQ} promoter by the PrgX pheromone receptor protein},
+  journal = {Journal of Bacteriology},
+  year = {2012},
+  volume = {194},
+  pages = {3386--3394},
+}
+@article{johnson:robinson:2016,
+  author = {Johnson, J. and Robinson, V.R.},
+  title = {Cleavage of JPS-1 in cells infected with human rhinovirus},
+  journal = {mSystems},
+  year = {2016},
+  volume = {1},
+  pages = {e00001-15},
+}
+@article{winnick:etal:2005,
+  title={How do you improve compliance?},
+  author={Winnick, Sheldon and Lucas, David O and Hartman, Adam L and Toll, David},
+  journal={Pediatrics},
+  volume={115},
+  pages={e718--e724},
+    year={2005},
+}
+\end{verbatim}
+
+\begin{authorbios}
+\section{AUTHOR BIOGRAPHIES}
+	Author biographies ($\leq$150 words each) and photos (black and white, passport size) can be inserted here. They are required for reviews in CMR and MMBR but optional for minireviews in other journals and Gems in JVI. Do not include them for primary-research articles. See the specific instructions for individual journals for more information.
+
+Use \verb|\begin{authorbios}...\end{authorbios}| environment to place your author biographies section, commands to do this: output will not come in the pdf for double blind mode.
+\end{authorbios}
+
+\end{document}
+

@@ -1,0 +1,3553 @@
+%
+%%% \iffalse
+%% Description: a bundle of LaTeX and BibTeX files to produce
+%%              ASM papers and simulated journal articles/notes
+%% Keywords: LaTeX, class, ASM, BibTeX, bibliographic-style, 9pt-option
+%% Author: 
+%% Maintainer: same
+%% Version: 1.0 <4 may 2023>
+%%
+%% Please see the information in file `asm.ins' on how you
+%% may use and (re-)distribute this file.  Run LaTeX on the file 
+%% `asm.ins' to get the main ASM class and other auxilary packages.
+%% Also run LaTeX on `asm.dtx' (this file) to obtain a users manual
+%% and code documentation.
+%%
+%% NOTE: This file may NOT be distributed if not accompanied
+%%       by 'asm.ins' and `asmlgo.eps'.
+%%% \fi
+%
+%%% \def\filename{asm.dtx}
+%%% \def\fileversion{2.4}
+%%% \def\filedate{1999/02/22}
+%%% \def\docdate{\filedate}
+%%% \date{\docdate}
+%
+%%% \newcommand*{\cls}[1]{\textsl{#1}}
+%%% \newcommand*{\pkg}[1]{\textsf{#1}}
+%%% \newcommand*{\file}[1]{\texttt{#1}}
+%%% \newcommand*{\kbd}[1]{\texttt{#1}}
+%%% \setcounter{errorcontextlines}{10}
+%
+%%% \MakeShortVerb{\|}
+%
+%%%  \CheckSum{1685}
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%
+%%% \title{%
+%%% \textsf{asm} -- a \LaTeX{} Class and \BibTeX{}
+%%% Style\\ for ASM\thanks{The American Institute of Aeronautics
+%%% and Astronautics.}\ \ Conference Papers\\ and Journal
+%%% Submission/Simulation\thanks{This document describes \textsf{asm} version 
+%%% \fileversion which was born on \docdate .}}
+%
+%%% \author{bil kleb\thanks{Research Scientist, NASA Langley
+%%% Research Center, Hampton, Virginia.}}
+%
+%%% \maketitle
+%
+%%% \begin{abstract}
+%%% This document describes the \textsf{asm} distribution which 
+%%% is centered around a modification of the standard \LaTeX{}
+%%% article class, \cls{article.cls}.  The new class produces
+%%% ASM-conformant\footnote{Note this distribution is not a
+%%% product of, nor endorsed by, the asm.}
+%%% conference papers and journal submittals---it
+%%% will even simulate the typesetting of journal articles and notes
+%%% for length-determination purposes.  This distribution also contains
+%%% a (mostly) ASM-compliant bibliographic style sheet,
+%%% sample documents, a sample presentation, and other test equipment.
+%%% \end{abstract}
+%
+%%% \tableofcontents
+%
+%%% \section{Introduction}
+%
+%%% The \textsf{asm} distribution consists of a \LaTeX{} class
+%%% and various other files which are supposed to simplify
+%%% the task of producing an ASM conference paper
+%%% and the subsequent journal submission
+%%% For instance, with a simple,
+%%% one-word option in the beginning of the document, a manuscript can
+%%% take the form of a two-column conference paper replete with
+%%% cover-page or a double-spaced journal submission manuscript
+%%% with figures and tables at the end, including the required
+%%% caption lists.
+%
+%%% \section{Userguide}
+%
+%%% I apologize for the sparseness of this documentation; but, hey,
+%%% this is not in my job description.\ |;)|\ \ Hopefully the sample
+%%% documents \file{asm.tex}, 
+%%% provide suitable documentation through example.
+%
+%%% \subsection{Requirements}
+%
+%%% The \kbd{ASM} distribution was developed using
+%%% \LaTeXe{} of 1995/12/01, patch level 1,
+%%% running \TeX{} 3.14159 and
+%%% \texttt{dvips} 5.58f---the te\TeX{} distribution 0.3.3.\footnote{
+%%% The \kbd{ASM} distribution has also been demonstrated on
+%%% a Mac running the {\scshape Oz}\TeX{} \TeX{} distribution and a
+%%% PC running the Mik\TeX{} \TeX{} distribution.}
+%%% So anything more recent should work, but anything older: no guarantees.
+%%% In particular, your \kbd{graphicx} package needs
+%%% to be newer than September 1995 so that the |keepaspectratio|
+%%% command is available.
+%
+%%% The \cls{asm} class depends
+%%% on having access to a number of packages.\footnote{When you process
+%%% a file with \LaTeX{}, it will let you which packages it is
+%%% missing.  The less common ones are \pkg{dropping} and \pkg{caption2} while
+%%% the other required packages:
+%%% \pkg{lastpage}, \pkg{setspace}, \pkg{endfloat}, \pkg{overcite},
+%%% \pkg{graphicx}, and \pkg{fancyhdr} are usually bundled with
+%%% most \LaTeX{} distributions.}
+%%% If your local site does not have all the packages necessary, they
+%%% can be obtained from your nearest Comprehensive TeX Archive
+%%% Network (CTAN) site.  In fact, chances are that this is where you found
+%%% this distribution.  Details on how to obtain packages from a
+%%% CTAN site are available at |http://www.tug.org/|
+%%% or various \LaTeX{} reference books~\cite{companion,guide}.
+%%% Especially helpful in locating various \LaTeX{} packages is
+%%% the \kbd{Catalogue.html} web page found in the \kbd{help/Catalogue}
+%%% directory of CTAN.
+%
+%%% \subsection{Setup}
+%
+%%% If you have not already run \file{asm.ins} through \LaTeX{},
+%%% do so.  The \pkg{docscript} utility (part of \LaTeX{})
+%%% will rip the code segments out of \file{asm.dtx}
+%%% and save them in several files. If you encounter an error
+%%% on installation like:
+%%% \begin{verbatim}
+%%% ! Undefined control sequence
+%%% \batchLine -> generate
+%%%          {\file {asm.cls}{\from{asm.dtx}{class}}}
+%%%  1.728 \processbatchFile
+%%% \end{verbatim}
+%%% this means that your \pkg{docstrip} is very old and that you
+%%% will need to update your entire \LaTeX{} distribution to
+%%% take advantage of the \pkg{asm} package.
+%
+%%% Move the files \file{asm.cls},
+%%% \file{asm9pt.sty}, \file{asmenf.cfg}, and \file{asmlgo.eps}
+%%% to a directory searched by \TeX{}\footnote{For a Unix te\TeX{} installation,
+%%% a privileged user could put these files in a directory named
+%%% something like \kbd{/usr/local/teTeX/texmf/tex/latex/asm}\ for
+%%% the entire site to use, remembering to run \kbd{texhash} to
+%%% re-configure te\TeX{} to search the new directory;
+%%% or, a lowly user could make their own directory, {\it e.g.},
+%%% \kbd{$\sim$/tex/inputs}, put the files in there, and set
+%%% the environment variable \kbd{TEXINPUTS} via `\kbd{setenv
+%%% TEXINPUTS $\sim$/tex/inputs:}'. The colon represents the system search
+%%% path so, in this case, the user files take precedence.
+%%% On a Mac or PC installation put these files in
+%%% a folder named something like \file{TeX-inputs}.}
+%%% and the file \file{asm.bst} to
+%%% a directory searched by \BibTeX{}.\footnote{%
+%%% Similar to preceding footnote, only on Unix use
+%%% the environment variable \kbd{BSTINPUTS}
+%%% for the bibliographic style file and
+%%% \kbd{BIBINPUTS} for the bibliographic database; for Mac's,
+%%% use the \file{BibTeX-inputs} folder, failing that try
+%%% using the \file{TeX-inputs} folder.}
+%%% Once things are installed, try to \LaTeX{} the sample asm
+%%% paper in the \file{demo/paper} directory, |asm.tex|.  It should
+%%% produce something similar to |asm.ps|.
+%%% 
+%%% \subsection{Usage}
+%%% The \cls{asm} class is envoked by including\\
+%%% |  \documentclass[|{\itshape options}|]{asm}|\\
+%%% at the beginning of your document.  The package
+%%% recognizes the following options: |submit|, |paper|,
+%%% |article|, |note|, and |cover|.
+%%% The |paper| option is the default and the |submit| option
+%%% overrides any other option.  The |cover| option produces
+%%% a cover-page for conference papers or simulated journal
+%%% reprints.
+%%% In addition, any options that the standard \LaTeX{} article
+%%% class accepts can be also inserted, {\it e.g.},
+%%% \kbd{draft}.\footnote{The \kbd{draft}
+%%% option replaces figures with a labeled box of the appropriate size.}
+%%% Note, when using the |note|
+%%% option, your title and author information may need to be
+%%% modified with extra line breaks (|\\|)
+%%% since this information is no longer allowed to span both
+%%% columns and may overfill the short tex twidth available.
+%%% Other than this, the document is written just like one were
+%%% using the standard \LaTeX{} article document class; and thus, I
+%%% don't have to write much more on usage since it has already
+%%% been documented by others in various \LaTeX{}
+%%% books~\cite{companion,guide,latex}. However,
+%%% some of the old commands have slightly different behaviors and there are
+%%% a few new commands designed to make life a little brighter;
+%%% these are discussed in the following sections.
+%
+%%% \subsection{General Commands}
+%
+%%% Several standard \LaTeX{} commands have been modified
+%%% to behave differently under the new class. In addition,
+%%% several new commands have been introduced to ease
+%%% document preparation. Both types are discussed in the
+%%% following subsections.
+%
+%%% \subsubsection{New Behavior from Old Commands}
+%
+%%% \DescribeMacro{\abstract}
+%%% The |\abstract| command has been redefined within the \cls{asm}
+%%% class to behave as part of the |\maketitle| sequence.  Simply
+%%% load |\abstract| as you would |\title| or |\author|, and
+%%% as long as you have not selected the options |submit| or |note|
+%%% (which do not allow for abstracts), the text loaded into
+%%% the |\abstract| command will be typeset, indented and centered,
+%%% underneath the title/author section. Remember |\abstract| must
+%%% be loaded {\bfseries before} |\maketitle| is invoked.  This is
+%%% typically done in the preamble\footnote{%
+%%% The preamble is defined as anywhere between the
+%%% \cs{documentclass}\texttt{\string{\string}}
+%%% and \cs{begin}\texttt{\string{document\string}} commands.}
+%%% of your \LaTeX{} document.
+%
+%%% \DescribeMacro{\date}
+%%% The \cls{asm} class automatically nulls the |\date| command used
+%%% by |\maketitle|.  Standard \LaTeX{} behavior of |\maketitle|
+%%% is to typeset the current date as part of the title section
+%%% if one is not given. So, normal one has to issue the command:
+%%% |\date{}| when producing ASM papers.  When using the
+%%% \cls{asm} class, this is no longer necessary; this command
+%%% has already been issued.
+%
+%%% \DescribeMacro{\and}
+%%% \DescribeMacro{\maketitle}
+%%% Suffice it to say that |\maketitle| and |\and| have also been
+%%% hacked, the ramifications of which I have yet to determine.
+%
+%%% \DescribeMacro{\section}
+%%% \DescribeMacro{\subsection}
+%%% \DescribeMacro{\subsubsection}
+%%% \DescribeMacro{\paragraph}
+%%% \DescribeMacro{\subparagraph}
+%%% One no longer has to use the starred versions of these
+%%% commands to defeat the numbering of sections.  The counter
+%%% \kbd{secnumdepth} has been set to $-2$ via,
+%%% |\setcounter{secnumdepth}{-2}|
+%%% so that even the unstarred versions of the sectioning commands
+%%% never produce a number.\footnote{The \kbd{secnumdepth} counter
+%%% controls how many
+%%% nesting levels of section numbers should be produced.
+%%% Of course you can defeat this by changing the counter back to its
+%%% \LaTeX{} \cls{article} class default value of $3$ which
+%%% will number sections down to subsections.}
+%%% In addition, the fonts, sizes, and positions normally produced by
+%%% these commands have been modified to make the output similar
+%%% to a typeset journal article.  In other words,
+%%% we take advantage of the fact that you are not using a
+%%% typewriter, {\it e.g.}, ASM-suggested underlining for section
+%%% names, etc.{} is replaced by the typesetting-capable equivalent.
+%
+%%% \subsubsection{New Commands}
+%
+%%% \DescribeMacro{\thanksibid}
+%%% The command |\thanksibid| is very similar to the standard
+%%% |\thanks| command which is used when footnoting
+%%% the author affliations within the |\author| field.
+%%% The distinction is that the |\thanksibid| command allows one
+%%% to repeat a given footnote symbol without repeating the associated
+%%% footnote text.  Example of use:
+%%% \begin{verbatim}
+%%%   \author{%
+%%%  Peter Gnoffo\thanks{Some thanks for a peter.},
+%%%  Bil Kleb\thanks{Some thanks for a bill.},
+%%%  Bill Wood\thanksibid{2}, and % use same footnote as for second author.
+%%%  Marge Mithus\thanks{Some thanks for a marge.}
+%%%  }
+%%% \end{verbatim}
+%%% Thus, |\thanksibid{2}| would only produce a footnote symbol
+%%% at the end of Bill Wood's name and it would not generate
+%%% another footnote.  Note that using the |\thanksibid| command
+%%% does not increment the footnote counter, so for the case given
+%%% above, an argument of `4' would not be a valid choice.
+%%% This command was developed so that when you have \cls{asm}
+%%% make a cover sheet, extraneous footnote symbols will not be
+%%% present.
+%
+%%% \DescribeMacro{\dropword}
+%%% The command |\dropword| is used for the first word of the
+%%% introduction, and for any option other than |submit|, will
+%%% produce a `dropped' capital for the beginning of the paragraph.
+%%% Its use is simply:\\
+%%% |  \dropword First words of the introduction, etc.|\\
+%%% Note: this command also capitalizes the remaining
+%%% portion of the first word.
+%%% This macro relies on the presence of the |dropping| package
+%%% by Mats Dahlgren~\cite{dropping}.
+%
+%%% \DescribeMacro{\incfig}
+%%% The |\incfig| command is used for including figures via David Carlisle's
+%%% \pkg{graphicx} package~\cite{graphicx}.  The
+%%% command |\incfig| command is merely a shorter version of
+%%% the original |\includegraphics| command along with a centering
+%%% command, {\it i.e.}:\\
+%%% |   \newcommand{\incfig}{\centering\includegraphics}|\\
+%%% It is typically used for including Encapsulated Postscript files
+%%% (|*.eps|) within a |figure| environment.
+%%% For example, to include
+%%% a figure named |figa.eps| residing in a |figs| subdirectory, one
+%%% would use:
+%%% \begin{verbatim}
+%%%    and \Figure{f:figurea} shows that things are purple.
+%%%    \begin{figure}
+%%%       \incfig{figs/figa}
+%%%       \caption{This is the caption for figure a.}
+%%%       \label{f:figurea}
+%%%    \end{figure}
+%%%    \Figure{f:figurea} also shows that people are green.
+%%% \end{verbatim}
+%%% For more information regarding the inclusion of external
+%%% graphic files, see the file \file{epslatex.ps} in the \kbd{info}
+%%% directory of the CTAN.  Also, read the Graphics Guide that
+%%% is part of the \pkg{graphicx} package.
+%
+%%% \DescribeEnv{subfigmatrix}
+%%% Via the \pkg{subfigure} package and a new environment, |subfigmatrix|,
+%%% one can easily create a ``matrix'' of subfigures. The
+%%% environment takes one argument: the number of columns across
+%%% the matrix will be.
+%%% For instance, to produce a matrix of four subfigures, two by two:
+%%% \begin{verbatim}
+%%%   \begin{figure}
+%%%     \begin{subfigmatrix}{2}
+%%%        \subfigure[Subfigure one.  ]{\incfig{one}\label{f:matrix_1}}
+%%%        \subfigure[Subfigure two.  ]{\incfig{two}}
+%%%        \subfigure[Subfigure three.]{\incfig{three}}
+%%%        \subfigure[Subfigure four. ]{\incfig{four}\label{f:matrix_4}}
+%%%     \end{subfigmatrix}
+%%%     \caption{A `matrix' of four subfigures.}
+%%%     \label{f:matrix}
+%%%   \end{figure}
+%%%   and with imbedded \label commands we can refer to
+%%%   Figure~\ref{f:matrix} in entirety or specific subfigures like
+%%%   subfigure~\ref{f:matrix_1} or subfigure~\ref{f:matrix_4}.
+%%% \end{verbatim}
+%%% See the  demonstration file \file{smpsubf.tex} which comes with
+%%% this distribtuion for more extensive examples.
+%
+%%% \subsection{Layout-specific Commands}
+%
+%%% The following commands are used to load information for other
+%%% commands that produce appropriate headers, footers, cover-page
+%%% items, and document notices---{\it e.g.}, copyright conditions. All
+%%% of these commands are normally set in the preamble
+%%% of your document (similar to |\author| and |\title|).
+%%% For a more modular, and perhaps cleaner approach, you could
+%%% place all of it in a file, \file{preamble.tex}, and use
+%%% |\input{preamble}| to include it in your main document.
+%
+%%% \subsubsection{Header and Footer Information}
+%
+%%% \DescribeMacro{\SubmitName}
+%%% \DescribeMacro{\PaperNumber}
+%%% \DescribeMacro{\ArticleIssue}
+%%% \DescribeMacro{\ArticleHeader}
+%%% \DescribeMacro{\NoteHeader}
+%%% The commands |\SubmitName|, |\PaperNumber|, 
+%%% |\ArticleIssue|, |\ArticleHeader|, and
+%%% |\NoteHeader| are used to put appropriate items in the header
+%%% and footer of each page, {\it e.g.},
+%%% \begin{verbatim}
+%%%   \SubmitName{Kleb}
+%%%   \PaperNumber{96--0825}
+%%%   \ArticleIssue{Vol.~32, No.~6, November--December 1995}% first page
+%%%   \ArticleHeader{Kleb et al: Pitch-Over Maneuver}% subsequent pages
+%%%   \NoteHeader{J.Spacecraft, Vol.~32, No.~6: Engineering Notes}
+%%% \end{verbatim}
+%%% The command |\SubmitName| is used to mark the main author's
+%%% name on all pages for the
+%%% journal manuscript submission option: |submit|.  The
+%%% |\PaperNumber| is used to include the paper number
+%%% for asm conference papers.
+%%% The commands |\ArticleIssue|,
+%%% |\ArticleHeader|, and |\NoteHeader| are used to create
+%%% the appropriate headers when simulating a journal article or
+%%% note.  The contents of |\ArticleIssue| appear on the first page
+%%% and the contents of |\ArticleHeader| appear on subsequent pages while for
+%%% journal note simulations the contents of |\NoteHeader| is used for all pages.
+%
+%%% \subsubsection{Cover-page Information}
+%
+%%% \DescribeMacro{\CoverFigure}
+%%% \DescribeMacro{\Conference}
+%%% \DescribeMacro{\JournalName}
+%%% \DescribeMacro{\JournalIssue}
+%%% \DescribeMacro{\JournalPage}
+%%% The commands |\CoverFigure|,
+%%% |\Conference|, |\JournalIssue|, |\JournalPage|, and |\JournalName| provide
+%%% information for producing cover-pages.
+%%% \begin{verbatim}
+%%%   \CoverFigure{tstfig.eps}
+%%%   \Conference{31st asm Aerospace Sciences \\
+%%%                  Meeting and Exhibit \\
+%%%            {\mfseries January 6--9, 1997/Reno, NV}}% note: non-bold date/loc.
+%%%   \JournalName{Journal of Spacecraft and Rockets}
+%%%   \JournalPage{715}
+%%%   \JournalIssue{Volume 32, Number 6}
+%%% \end{verbatim}
+%%% The commands |\CoverFigure| and
+%%% |\Conference| define a representative figure (optional)
+%%% and conference name/date/location to be used on the cover-page
+%%% of a conference paper, while
+%%% the commands |\JournalName| and |\JournalIssue| are for the
+%%% cover-page produced for journal article or note reprint simulations.
+%
+%%% \subsubsection{Copyright and Other Document Notices}
+%
+%%% \DescribeMacro{\PaperNotice}
+%%% \DescribeMacro{\JournalNotice}
+%%% A footnote describing the copyright conditions
+%%% and other information about the document are incorporated via the
+%%% |\PaperNotice| and |\JournalNotice| commands.  These normally include
+%%% one of the the copyright series
+%%% of commands: |\CopyrightA|, |\CopyrightB|, |\CopyrightC|, or
+%%% |\CopyrightD|, described below.
+%%% To use, simply include something like the following in
+%%% the your document's preamble:
+%%% \begin{verbatim}
+%%%   \PaperNotice{\CopyrightA{1996}}
+%%%   \JournalNotice{Presented as Paper 96--0825 at the asm 34th
+%%%                  Aerospace Sciences Meeting, Reno,~NV,
+%%%                  Jan.~15--18,~1996; received Feb.~15,~1996;
+%%%                  revision received Nov.~25,~1996. \CopyrightC}
+%%% \end{verbatim}
+%
+%%% \DescribeMacro{\CopyrightA}
+%%% \DescribeMacro{\CopyrightB}
+%%% \DescribeMacro{\CopyrightC}
+%%% \DescribeMacro{\CopyrightD}
+%%% The copyright commands will expand to one of the standard asm
+%%% forms: A, B, C, or D.
+%%% Note: they each have different arguments---or no
+%%% arguments---depending on the requirements:\\
+%%% |  \CopyrightA{|\textit{year}|}|\\
+%%% |  \CopyrightB{|\textit{year}|}{|\textit{full name or company}|}|\\
+%%% |  \CopyrightC|\\
+%%% |  \CopyrightD{|\textit{year}|}|\\
+%%% See your asm copyright instructions for which form to use.
+%
+%%% \section{Known Problems}  
+%%% 
+%%% \begin{itemize}
+%
+%%%   \item The bibliographic style sheet |asm.bst| isn't fully
+%%%         tested; and thus, you may need to fiddle with your
+%%%         |.bbl| file for your final copy, {\it i.e.}, edit |file.bbl|
+%%%         after running a \LaTeX{}, \BibTeX{}, \LaTeX{} sequence,
+%%%         but before running \LaTeX{} the final time.  Note, if
+%%%         you run \BibTeX{} after modifying |file.bbl|, you will
+%%%         lose your modifications when \LaTeX{} is run
+%%%         again. Therefore, it is best to turn off write-permission
+%%%         on \file{file.bbl} after you have it correct.
+%
+%%%   \item When using the |submit| option for a document which
+%%%         contains subfigures,\footnote{See
+%%%         sample documents \file{smpasm.tex} and
+%%%         \file{smpsubf.tex} for examples of subfigure use.}
+%%%         some of the subfigures my be clipped.
+%%%         In fact, the way the |submit| option deals with subfigures
+%%%         needs work---to put it mildly.  The current work-around
+%%%         is to add \kbd{width} or \kbd{height} options to your |\incfig|
+%%%         commands until the figures fit properly.  These options
+%%%         are explained in the documentation which comes with
+%%%         the \pkg{graphics} package~\cite{graphicx}.
+%
+%%%   \item Currently you have to make subfigure captions appear
+%%%         in bold font explicitly, {\it e.g.},\\
+%%%         |  \subfigure[\bf Subfigure caption.]{\incfig{fig.eps}}|\\
+%%%         The next version of \pkg{subfigure} is supposed to remedy this.
+%
+%%%   \item The notices come after the author footnotes.  To
+%%%         produce the correct behavior requires significant
+%%%         changes to the |\maketitle| command.
+%
+%%%   \item The simulated journal article modes use the standard, free,
+%%%         Computer Modern Fonts.  The asm journals most likely
+%%%         use licensed (\$) fonts.
+%
+%%%   \item The simulated journal cover-pages do not have anywhre near
+%%%         the correct font for the journal name---does anyone know
+%%%         where to get such a {\em free}, tall, bold, squashed
+%%%         helvetic-style font?  It looks like Bitstream's Aurora
+%%%         condensed\ldots
+%
+%%%   \item (Not actually an \pkg{asm} problem.)
+%%%         Using the starred versions of |figure| and |table|
+%%%         environments (floats which span both columns)
+%%%         inter-mixed with the unstarred versions (single-column
+%%%         wide floats) often creates a situation where the
+%%%         figures or tables appear out of order. For the final
+%%%         copy, this can normally be corrected with judicious
+%%%         use of float position specifiers.\footnote{Recall, {\bf
+%%%         never} use just \kbd{[h]}, always give other options or
+%%%         that float might get `stuck' and force it and all the
+%%%         following floats to the end of the document.}
+%%%         Unfortunately, this is
+%%%         stock, documented behavior for \LaTeX{}.
+%%%         However, recently a package \pkg{fix2col} has become available
+%%%         which appears to rectify this behavior.  It can be
+%%%         found on CTAN in the
+%%%         \kbd{macros/latex/contrib/supported/carlisle} directory.
+%
+%%% \end{itemize}
+%
+%%% \section{Acknowledgements}
+%
+%%% Bundling and documenting this |asm| distribution in docstrip
+%%% format was done by using other packages as a model,
+%%% particularly, Mats Dahlgren's \pkg{dropping}~\cite{dropping}
+%%% and Jeff Goldberg {\em et al}'s \pkg{endfloat}~\cite{endfloat}.
+%
+%%% I want to thank the people of the |comp.text.tex| newsgroup,
+%%% the \TeX{}/\LaTeX{} Frequently Asked Questions maintainers,
+%%% and various package authors for patiently answering my inane
+%%% questions, in particular, but in no particular order:
+%%% \begin{list}
+%%%       {$\triangleright$}
+%%%       {\setlength{\itemsep}{0pt}\setlength{\parsep}{0pt}}
+%%%   \item Donald Arsenau (|asnd@reg.triumf.ca|)
+%%%   \item Robin Fairbairns (|Robin.Fairbairns@cl.cam.ac.uk|)
+%%%   \item Piet van Oostrum (|piet@cs.ruu.nl|)
+%%%   \item Jeroen Nijhof (|nijhof@th.rug.nl|)
+%%%   \item Steven Douglas Cochran (|sdc+@cs.cmu.edu|)
+%%%   \item Jeffrey Goldberg (|J.Goldberg@cranfield.ac.uk|)
+%%%   \item Mark Wooding (|mdw@excessus.demon.co.uk|)
+%%%   \item Paul Foley (|mycroft@actrix.gen.nz|)
+%%%   \item David Kastrup (|dak@fsnif.neuroinformatik.ruhr-uni-bochum.de|)
+%%%   \item Jerry Leichter (|leichter@smarts.com|)
+%%%   \item P.~W.~Daly (|daly@linpwd.mpae.gwdg.de|)
+%%%   \item David Carlisle (|carlisle@goofy.zdv.Uni-Mainz.de|)
+%%%   \item Edward Sznyter (|sznyter@babel.com|)
+%%% \end{list}
+%%% 
+%%% \section{Sending a Bug Report}
+%%% The \textsf{asm} distribution is highly likely to contain
+%%% bugs.  Reports of bugs in the package are most welcome.
+%%% However, I consider this to be a minimally ``supported'' package.
+%%% I will do what I can, when I can---promising nothing.
+%%% Before filing a bug report, please take the following actions:
+%%% \begin{enumerate}
+%%%   \item Ensure your problem is not due to your own input file(s)
+%%%         styles sheet(s), or package(s);
+%%%   \item Ensure your problem is not covered in the section 
+%%%        ``Known Problems'' above;
+%%%   \item Try to isolate the problem by writing a {\it minimal}
+%%%         \LaTeX{} input file which reproduces the unexpected behavior.
+%%%         Include the command\\ 
+%%%         |  \setcounter{errorcontextlines}{50}|\\ 
+%%%         in your input to provide extra context when things go awry;
+%%%   \item Run your file through \LaTeX{};
+%%%   \item Send a description of your problem, the input file 
+%%%         and the log file via e-mail to: \texttt{w.l.kleb@larc.nasa.gov}.
+%%% \end{enumerate}
+%%% I am not in the business of answering generic \TeX{}/\LaTeX{}
+%%% questions; so if your problem appears to be such, I will
+%%% let you know.\bigskip
+%%% 
+%%% \noindent{\itshape Enjoy(?) the everpresent deadline and enjoy your
+%%% \LaTeX!\raisebox{-\baselineskip}{---bil}}
+%
+%%% \begin{thebibliography}{1}
+%
+%%% \bibitem{companion}
+%%% Michel Goossens, Frank Mittelbach, and Alexander Samarin.
+%%% \newblock{\em The {\LaTeX} Companion}.
+%%% \newblock Addison-Wesley, Reading, Massachusetts, 1994.
+%
+%%% \bibitem{guide}
+%%% Helmut Kopka and Patrick W. Daly.
+%%% \newblock{\em A Guide to {\LaTeXe}: Document Prepartion for
+%%%               Beginners and Advanced Users}.
+%%% \newblock 2nd ed.
+%%% \newblock Addison-Wesley, Reading, Massachusetts, 1994.
+%
+%%% \bibitem{latex}
+%%% Leslie Lamport.
+%%% \newblock{\em {\LaTeX}: A Document Preparation System}.
+%%% \newblock 2nd ed.
+%%% \newblock Addison-Wesley, Reading, Massachusetts, 1994.
+%
+%%% \bibitem{dropping}
+%%% Mats Dahlgren.
+%%% \newblock \pkg{dropping}---A \LaTeX{} Macro for Dropping
+%%%           the First Character(s) of a Paragraph.
+%%% \newblock June 1996. (version~0.1)
+%%% \newblock Electronic Documentation.
+%
+%%% \bibitem{graphicx}
+%%% David Carlisle.
+%%% \newblock Packages in the `graphics' bundle.
+%%% \newblock December 1995.
+%%% \newblock Electronic Documentation.
+%
+%%% \bibitem{endfloat}
+%%% James Darrell McCauley and Jeff Goldberg.
+%%% \newblock The \texttt{endfloat} Package.
+%%% \newblock October 1995. (version~2.4i)
+%%% \newblock Electronic Documentation.
+%
+%%% \end{thebibliography}
+%
+%%% \StopEventually{\PrintChanges}
+%
+%%% \newpage
+%%% 
+%%% \section{The Documentation}
+%
+%%% The following contains the documentation driver for this user manual.
+%%%    \begin{macrocode}
+%<*driver>
+\documentclass{ltxdoc}
+\setlength\hfuzz{2pt}% reduce overfull warnings
+\OnlyDescription   % stop at \StopEventually comment to get everything
+%\RecordChanges    % display change information
+\begin{document}
+  \DocInput{asm.dtx}
+\end{document}
+%</driver>
+%%%    \end{macrocode}
+%%% 
+%%% \section{The Code}
+%
+%%% For the interested reader(s), following is a semi-documented
+%%% of the class code, the 9pt style, bibliographic style file, and
+%%% the endfloat configuration.  These detailed coding bits
+%%% are not included in the Users' Manual by default, if you really
+%%% want to see these in typeset form, you need to comment out the
+%%% |\OnlyDescription| line in the |<driver>| section of this file
+%%% \file{asm.dtx}.
+%%% If you feel the need to
+%%% modify things, simply cut the section you want to change
+%%% and save it to a file named \file{mymods.sty}.  Then modify
+%%% the code in \file{mymods.sty} to suit your needs and include
+%%% it in your document via |\usepackage{mymods}| in the
+%%% preamble.
+%
+%%% \subsection{The class code}
+%
+%%% The underlying logic is supposed to look like:\footnote{Picture
+%%% environment flowchart generated by flow 0.99b.}\\[1pt]
+%
+%%% \setlength\unitlength{1.8em}
+%%% \thicklines
+%%% \begin{picture}(16.000000,20.000000)(-1.000000,-20.000000)
+%%% \put(1.0000,-0.5000){\oval(2.0000,1.0000)}
+%%% \put(0.0000,-1.0000){\makebox(2.0000,1.0000)[c]{\shortstack[c]{
+%%% begin
+%%% }}}
+%%% \put(1.0000,-1.0000){\vector(0,-1){1.0000}}
+%%% \put(-1.0000,-4.0000){\framebox(4.0000,2.0000)[c]{\shortstack[c]{
+%%% code common\\
+%%% to all options
+%%% }}}
+%%% \put(1.0000,-4.0000){\vector(0,-1){1.0000}}
+%%% \put(-0.5000,-6.5000){\line(1,1){1.5000}}
+%%% \put(-0.5000,-6.5000){\line(1,-1){1.5000}}
+%%% \put(2.5000,-6.5000){\line(-1,-1){1.5000}}
+%%% \put(2.5000,-6.5000){\line(-1,1){1.5000}}
+%%% \put(-0.5000,-8.0000){\makebox(3.0000,3.0000)[c]{\shortstack[c]{
+%%% \texttt{submit}?
+%%% }}}
+%%% \put(2.5000,-6.0500){\makebox(0,0)[lt]{No}}
+%%% \put(1.4500,-8.0000){\makebox(0,0)[lb]{Yes}}
+%%% \put(1.0000,-8.0000){\vector(0,-1){1.0000}}
+%%% \put(0.0000,-11.0000){\framebox(2.0000,2.0000)[c]{\shortstack[c]{
+%%% \texttt{submit}\\
+%%% code
+%%% }}}
+%%% \put(1.0000,-11.0000){\vector(0,-1){1.0000}}
+%%% \put(1.0000,-12.5000){\oval(2.0000,1.0000)}
+%%% \put(0.0000,-13.0000){\makebox(2.0000,1.0000)[c]{\shortstack[c]{
+%%% done
+%%% }}}
+%%% \put(2.5000,-6.5000){\vector(1,0){1.0000}}
+%%% \put(3.5000,-7.5000){\framebox(5.0000,2.0000)[c]{\shortstack[c]{
+%%% \texttt{paper}/\texttt{article}\\
+%%% /\texttt{note} code
+%%% }}}
+%%% \put(6.0000,-7.5000){\vector(0,-1){1.0000}}
+%%% \put(4.5000,-10.0000){\line(1,1){1.5000}}
+%%% \put(4.5000,-10.0000){\line(1,-1){1.5000}}
+%%% \put(7.5000,-10.0000){\line(-1,-1){1.5000}}
+%%% \put(7.5000,-10.0000){\line(-1,1){1.5000}}
+%%% \put(4.5000,-11.5000){\makebox(3.0000,3.0000)[c]{\shortstack[c]{
+%%% \texttt{paper}?
+%%% }}}
+%%% \put(7.5000,-9.5500){\makebox(0,0)[lt]{No}}
+%%% \put(6.4500,-11.5000){\makebox(0,0)[lb]{Yes}}
+%%% \put(7.5000,-10.0000){\vector(1,0){1.0000}}
+%%% \put(8.5000,-11.0000){\framebox(4.0000,2.0000)[c]{\shortstack[c]{
+%%% \texttt{article} or\\
+%%% \texttt{note} code
+%%% }}}
+%%% \put(10.5000,-11.0000){\vector(0,-1){1.0000}}
+%%% \put(9.0000,-13.5000){\line(1,1){1.5000}}
+%%% \put(9.0000,-13.5000){\line(1,-1){1.5000}}
+%%% \put(12.0000,-13.5000){\line(-1,-1){1.5000}}
+%%% \put(12.0000,-13.5000){\line(-1,1){1.5000}}
+%%% \put(9.0000,-15.0000){\makebox(3.0000,3.0000)[c]{\shortstack[c]{
+%%% \texttt{article}?
+%%% }}}
+%%% \put(12.0000,-13.0500){\makebox(0,0)[lt]{No}}
+%%% \put(10.9500,-15.0000){\makebox(0,0)[lb]{Yes}}
+%%% \put(12.0000,-13.5000){\vector(1,0){1.0000}}
+%%% \put(13.0000,-14.5000){\framebox(2.0000,2.0000)[c]{\shortstack[c]{
+%%% \texttt{note}\\
+%%% code
+%%% }}}
+%%% \put(14.0000,-14.5000){\vector(0,-1){1.0000}}
+%%% \put(14.0000,-16.0000){\oval(2.0000,1.0000)}
+%%% \put(13.0000,-16.5000){\makebox(2.0000,1.0000)[c]{\shortstack[c]{
+%%% done
+%%% }}}
+%%% \put(10.5000,-15.0000){\vector(0,-1){1.0000}}
+%%% \put(9.0000,-18.0000){\framebox(3.0000,2.0000)[c]{\shortstack[c]{
+%%% \texttt{article}\\
+%%% code
+%%% }}}
+%%% \put(10.5000,-18.0000){\vector(0,-1){1.0000}}
+%%% \put(10.5000,-19.5000){\oval(2.0000,1.0000)}
+%%% \put(9.5000,-20.0000){\makebox(2.0000,1.0000)[c]{\shortstack[c]{
+%%% done
+%%% }}}
+%%% \put(6.0000,-11.5000){\vector(0,-1){1.0000}}
+%%% \put(5.0000,-14.5000){\framebox(2.0000,2.0000)[c]{\shortstack[c]{
+%%% \texttt{paper}\\
+%%% code
+%%% }}}
+%%% \put(6.0000,-14.5000){\vector(0,-1){1.0000}}
+%%% \put(6.0000,-16.0000){\oval(2.0000,1.0000)}
+%%% \put(5.0000,-16.5000){\makebox(2.0000,1.0000)[c]{\shortstack[c]{
+%%% done
+%%% }}}
+%%% \end{picture}\\
+%%% This does not mean the code as a whole is organized according
+%%% to this; but, rather this is the case for each
+%%% macro/environment defined.
+%
+%%% First, the package is to identify itself:
+%%%    \begin{macrocode}
+%
+%<*class>
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% LaTeX Templates Journal Article
+%%% LaTeX Class
+%%% Version 1.0 (May 4, 2023)
+%
+%%% This class originates from:
+%%% https://www.LaTeXTemplates.com
+%
+%%% Author:
+%%% <AuthorName>
+%
+%%% License:
+%%% CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	CLASS CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{LTJournalArticle}[2023/02/07 LaTeX Templates Journal Article Class v2.0]
+
+\usepackage{etoolbox} % Required for conditional logic and easily changing commands
+
+\newtoggle{unnumberedsections} % Create toggle for a class option
+\settoggle{unnumberedsections}{false} % Default value for the class option
+\DeclareOption{unnumberedsections}{\settoggle{unnumberedsections}{true}} % Set the class option toggle if the class option was used in the template
+
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}} % Pass through any extra options specified to the base class
+
+
+\newif\if@DoubleBlind%
+\DeclareOption{DoubleBlind}{\@DoubleBlindtrue}
+
+\ProcessOptions\relax % Process class options
+
+\LoadClass{article} % Load the base class
+
+%%%%%%%%%%%%%%%%General Packages Start
+\newif\if@draftmode
+\RequirePackage[mathlines]{lineno}
+\linenumbers
+
+\RequirePackage[T1]{fontenc}
+%\RequirePackage[utf8]{inputenc}
+\RequirePackage{microtype}
+\renewcommand{\ttdefault}{\sfdefault}
+
+\RequirePackage{graphicx}
+\RequirePackage{changepage}
+\RequirePackage{enumitem}
+
+\RequirePackage[mathlines]{lineno}
+%\if@reqslineno\linenumbers\fi
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+  \if@draftmode
+	\usepackage{concrete,concmath} % alternative to MinionPro, mathpazo
+  \else
+	\usepackage{tgpagella,mathpazo} %
+  \fi
+
+%% Lists
+\RequirePackage{enumitem}
+\setlist{nosep,labelindent=\parindent}
+
+%% Tables
+\RequirePackage{booktabs}
+\RequirePackage{tabularx}
+\newcommand{\tnote}[1]{\textsuperscript{\textit{#1}}}
+\newlist{tablenotes}{description}{1}
+\setlist[tablenotes]{labelsep=0pt,format=\mdseries\itshape\textsuperscript}
+
+%%% Left-, right- and center-aligned auto-wrapping column types
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+\RequirePackage[figuresright]{rotating}%
+\usepackage{ifthen}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{gensymb}			% for Celsius 
+\usepackage{siunitx} 			% SI units
+\usepackage{textcomp} 			% required for siunitx/microtype compatibility
+\usepackage[version=4]{mhchem} 	% chemical formulas
+\usepackage{graphics}
+\usepackage{epstopdf}
+\usepackage[numbers,square,comma]{natbib}
+%%\renewcommand\@biblabel[1]{#1.}
+\usepackage{setspace}
+%%\usepackage{authblk}
+\RequirePackage[hyphenbreaks]{breakurl}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
+\usepackage{lettrine}
+\RequirePackage{longtable}%
+\RequirePackage{caption}
+\RequirePackage{epstopdf}
+\RequirePackage{xcolor}
+\RequirePackage{framed}
+\RequirePackage{ragged2e}
+\usepackage[none]{hyphenat}
+
+
+%%%%%%%%%%%%%%%%PaperSize Start
+%\baselineskip=12pt plus0.01pt minus0.01pt%
+
+\abovedisplayskip 9\p@ \@plus 3\p@ \@minus1.5\p@%
+\abovedisplayshortskip 0pt% \@plus 3\p@%
+\belowdisplayskip\abovedisplayskip%
+\belowdisplayshortskip 6\p@ \@plus 2\p@ \@minus1\p@%
+
+%%% Default document point size
+\renewcommand\normalsize{%
+  \@setfontsize\normalsize{12bp}{14pt plus0.01\p@ minus0.01\p@}
+  \let\@listi\@listI
+\def\textsc##1{\fontsize{7}{12}\selectfont\uppercase{##1}}%
+}%
+\normalsize%
+
+\let\@bls\baselineskip%
+
+%%% Stretchable vertical spaces used for \smallskip, \medskip and \bigskip
+\setlength\smallskipamount{.25\@bls \@plus 1\p@ \@minus 1\p@} % quarter-line
+\setlength\medskipamount{.5\@bls \@plus 2\p@ \@minus 2\p@}    % half-line
+\setlength\bigskipamount{1\@bls \@plus 3\p@ \@minus 3\p@}     % one-line
+
+   \setlength{\paperheight}{279.4truemm}  % trimmed page height
+   \setlength{\paperwidth}{215.9truemm}    % trimmed page width
+   \setlength\textwidth{470pt}%text measure excluding margins%%%
+   \setlength{\textheight}{648pt}%
+   \addtolength\textheight{\topskip}
+   \addtolength{\textheight}{-10pt}%
+   \columnwidth=\textwidth%
+%%%   \fullwidth=\textwidth%
+
+\setlength\columnsep{0pt}% space between columns for
+\setlength\columnseprule{0\p@}% width of rule between two columns
+
+   \setlength\topmargin{0pt}% head margin
+   \addtolength\topmargin{-1in}% subtract out the 1 inch driver margin
+   \addtolength\topmargin{72bp}% subtract out the 1 inch driver margin
+
+%%%   \addtolength\topmargin{-1pt}% subtract out the 1 inch driver margin
+   \setlength\oddsidemargin{72bp}%%{96pt}%
+   \addtolength\oddsidemargin{-1in}%
+   \addtolength\oddsidemargin{0pt}%
+%%   \setlength\evensidemargin{\oddsidemargin}%Updated by Devi as per mail received from Karthick on 14022022-JIRA  ID: LTX-2261
+   \setlength\evensidemargin{72bp}%
+   \addtolength\evensidemargin{-1in}%
+   \addtolength\evensidemargin{0pt}%
+   \settoheight\headheight{12pt}% height of running head
+   \setlength\topskip{7\p@}% height of first line of text
+   \setlength\headsep{10pt}% space below running head --
+   \addtolength\headsep{-\topskip}%   base to base with first line of text
+   \addtolength\headsep{18pt}%   base to base with first line of text
+%%%   \setlength\footins{24\p@}% space above footer line
+\addtolength{\skip\footins}{15.87pt}%
+   \setlength\footskip{32\p@}% space above footer line
+   \setlength\maxdepth{.5\topskip}% pages can be deep by half a line
+   \addtolength\topmargin{-\headheight}% subtract Headheight and headsep
+   \addtolength\topmargin{-\headsep}% subtract Headheight and headsep
+%%%%%%%%%%%%%%%%PaperSize END
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Standard Settings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% (Do not modify below) %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Line spacing
+\setlength\lineskip{1\p@} \setlength\normallineskip{1\p@}
+\renewcommand\baselinestretch{}
+
+%%% Allow some loose lines
+\tolerance=1000
+
+%%% Page break penalties
+\@lowpenalty   51 \@medpenalty  151 \@highpenalty 301
+
+%%% Set badness and tolerance
+\vbadness=9999 \tolerance=9999
+
+%%% Don't allow consecutive hyphens and hyphens at the bottom of the page.
+\doublehyphendemerits 100000 \finalhyphendemerits  1000000
+
+%%% Disallow widows and orphans
+\clubpenalty 10000 \widowpenalty 10000
+
+%%% Disable page breaks before equations, allow pagebreaks after
+%%% equations and discourage widow lines before equations.
+\displaywidowpenalty 500 \predisplaypenalty   10000 \postdisplaypenalty  0
+
+%%% Allow breaking the page in the middle of a paragraph
+\interlinepenalty 0
+
+%%% Disallow breaking the page after a hyphenated line
+\brokenpenalty 10000
+
+%%% Hyphenation; don't split words into less than three characters
+\lefthyphenmin=3 \righthyphenmin=3
+
+%%% Float placement parameters
+
+%%% The total number of floats that can be allowed on a page.
+\setcounter{totalnumber}{10}
+%%% The maximum number of floats at the top and bottom of a page.
+\setcounter{topnumber}{5} \setcounter{bottomnumber}{5}
+%%% The maximum part of the top or bottom of a text page that can be
+%%% occupied by floats. This is set so that at least four lines of text
+%%% fit on the page.
+\renewcommand\topfraction{.921}
+\renewcommand\bottomfraction{.921}
+%%% The minimum amount of a text page that must be occupied by text.
+%%% This should accomodate four lines of text.
+\renewcommand\textfraction{.079}
+%%% The minimum amount of a float page that must be occupied by floats.
+\renewcommand\floatpagefraction{.887}
+
+%%% The same parameters repeated for double column output
+\renewcommand\dbltopfraction{.88}
+\renewcommand\dblfloatpagefraction{.88}
+
+%%% Space between floats
+\setlength\floatsep    {24\p@ \@plus 2\p@ \@minus 2\p@}
+%%% Space between floats and text
+\setlength\textfloatsep{24\p@ \@plus 2\p@ \@minus 4\p@}
+%%% Space above and below an inline figure
+\setlength\intextsep   {18\p@ \@plus 2\p@ \@minus 2\p@}
+
+%%% For double column floats
+\setlength\dblfloatsep    {12\p@ \@plus 2\p@ \@minus 2\p@}
+\setlength\dbltextfloatsep{20\p@ \@plus 2\p@ \@minus 4\p@}
+
+%%% Space left at top, bottom and inbetween floats on a float page.
+\setlength\@fptop{-2\p@}        % no space above float page figures
+\setlength\@fpsep{12\p@ \@plus 2fil} \setlength\@fpbot{0\p@ \@plus 1fil}
+
+%%% The same for double column
+\setlength\@dblfptop{-2\p@} \setlength\@dblfpsep{12\p@ \@plus 1fil}
+\setlength\@dblfpbot{0\p@ \@plus 2fil}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%% End of Standard Settings %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%Runnind Head
+\newbox\rhfootbox%
+\setbox\rhfootbox=\hbox{\fontsize{8bp}{9bp}\selectfont{American Society for Microbiology \rule{0.25pt}{5pt} www.asm.org}}
+
+\newdimen\rhfootdimen%
+\rhfootdimen=\textwidth%
+\advance\rhfootdimen by -\wd\rhfootbox
+
+\gdef\ps@headings{%
+\let\@oddhead\relax
+\let\@evenhead\@oddhead
+\def\@oddfoot{\hbox to \textwidth{\fontsize{8bp}{9bp}\selectfont\hfill{\textbf{\thepage}}\hfill}}
+\def\@evenfoot{\hbox to \textwidth{\fontsize{8bp}{9bp}\selectfont\hfill{\textbf{\thepage}}\hfill}}}
+
+%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%General Packages End
+
+\renewcommand{\singlespacing}{%
+  \setstretch {\setspace@singlespace}%  normally 1
+  \vskip \baselineskip  % Correction for coming into singlespace
+}
+
+\newif\ifonehalfspacing
+\onehalfspacingfalse
+
+\renewcommand{\onehalfspacing}{%
+\global\onehalfspacingtrue
+  \setstretch{1.5}%  default
+  \ifcase \@ptsize \relax % 10pt
+    \setstretch {1.5}%
+  \or % 11pt
+    \setstretch {1.238}%
+  \or % 12pt
+    \setstretch {1.266}%
+  \fi
+}
+
+\renewcommand{\doublespacing}{%
+  \setstretch {1.667}%  default
+  \ifcase \@ptsize \relax % 10pt
+    \setstretch {1.667}%
+  \or % 11pt
+    \setstretch {1.618}%
+  \or % 12pt
+    \setstretch {1.655}%
+  \fi
+}
+
+
+\onehalfspacing
+
+\renewcommand*{\LettrineTextFont}{}
+\gdef\dropcap#1{\noindent#1}
+
+\def\@linenumber{}
+\def\linenumber#1{\gdef\@linenumber{#1}}
+\def\linenumberfont{\normalfont\normalsize}
+
+%%%%CMYK and RGB Color
+\newcommand{\Secondcolorstyle}[1]{
+\ifthenelse{\equal{#1}{cmyk}}{\definecolor{SecondColor}{cmyk}{0,.90,.77,0.28}}{%
+\ifthenelse{\equal{#1}{rgb}}{%\definecolor{SecondColor}{rgb}{.73,.27,.25}
+			    \definecolor{SecondColor}{RGB}{183,19,42}
+}{%
+\plese_provide_Secondcolorstyle}}}
+
+\Secondcolorstyle{rgb}
+
+\gdef\Secondcolor#1{\textcolor{SecondColor}{#1}}
+%%%%%%%%%
+
+\pagestyle{headings}
+%%%%%%%%%%%%%%%%Running Heda End
+
+\gdef\sauthfn#1{#1}
+\gdef\authfn#1{${}^{#1}$}
+
+
+\def\@ArticleType{}%
+\long\gdef\papertype#1{\def\@ArticleType{#1}}
+
+
+\long\def\@corraddress{}
+\long\def\corraddress#1{\def\@corraddress{\textsuperscript{*}#1}\par}
+
+\long\def\@presentaddress{}
+\long\gdef\presentaddress#1{\def\@presentaddress{#1}}
+
+\def\@corresp{}%
+\long\gdef\corresp#1#2#3{\begingroup%
+\long\gdef\@corresp{\normalsize{#1}~\textbf{#2}: #3\vphantom{yg}\par}
+\endgroup}
+
+\def\@vol{}
+\gdef\vol#1{\begingroup\gdef\@rhfootvol{#1}%
+\gdef\@vol{#1}\endgroup}
+
+\def\@articleno{}
+\gdef\articleno#1{\begingroup\gdef\@rhfootvol{#1}%
+\gdef\@articleno{#1}\endgroup}
+
+\gdef\titelocabbrev#1{\gdef\@titelocabbrev{\ifthenelse{\equal{true}{#1}}{Eloc.}{Elocation}}}
+\def\@elocationid{}
+\def\elocationid#1{\begingroup%
+\gdef\@elocationid{\@titelocabbrev~#1}\endgroup}
+
+\gdef\MonthVal#1{%
+\ifthenelse{\equal{#1}{1}}{January}{%
+\ifthenelse{\equal{#1}{2}}{February}{%
+\ifthenelse{\equal{#1}{3}}{March}{%
+\ifthenelse{\equal{#1}{4}}{April}{%
+\ifthenelse{\equal{#1}{5}}{May}{%
+\ifthenelse{\equal{#1}{6}}{June}{%
+\ifthenelse{\equal{#1}{7}}{July}{%
+\ifthenelse{\equal{#1}{8}}{August}{%
+\ifthenelse{\equal{#1}{9}}{September}{%
+\ifthenelse{\equal{#1}{01}}{January}{%
+\ifthenelse{\equal{#1}{02}}{February}{%
+\ifthenelse{\equal{#1}{03}}{March}{%
+\ifthenelse{\equal{#1}{04}}{April}{%
+\ifthenelse{\equal{#1}{05}}{May}{%
+\ifthenelse{\equal{#1}{06}}{June}{%
+\ifthenelse{\equal{#1}{07}}{July}{%
+\ifthenelse{\equal{#1}{08}}{August}{%
+\ifthenelse{\equal{#1}{09}}{September}{%
+\ifthenelse{\equal{#1}{10}}{October}{%
+\ifthenelse{\equal{#1}{11}}{November}{%
+\ifthenelse{\equal{#1}{12}}{December}{%
+\ifthenelse{\equal{#1}{XX}}{XX}{%
+}}}}}}}}}}}}}}}}}}}}}}}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%Title Page Journal Details %%%%%%%%%%%%%%%
+
+\renewcommand\footnoterule{%
+  \kern-3\p@
+  \hrule\@width6pc
+  \kern2.6\p@}
+
+%%%%%%%%%%%%%%%%%%Author and Affiliation Definitions
+\def\@asmauthor{}
+\def\author#1{\def\@asmauthor{\let\authfn\sauthfn\fontsize{12pt}{14pt}\selectfont\bfseries\boldmath#1}}
+
+\newcounter{affilnumcnt}%
+\newcount\affilnumcnt%
+\affilnumcnt=\theaffilnumcnt%
+
+\def\@asmaffil{}%
+\def\affil#1{\g@addto@macro\@asmaffil{\advance\affilnumcnt by1%
+\fontsize{12pt}{14pt}\selectfont\mdseries\textsuperscript{\the\affilnumcnt}#1\vphantom{py}\par}}
+
+%%%%%%%%%%%%%%%%%%Author And Affiliations definitions
+%%%%%%%%%%%%%%%%%%Article Title Start
+\renewcommand\maketitle{\par
+  \begingroup
+    \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
+    \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
+    \long\def\@makefntext##1{\parindent 1em\noindent
+            \hb@xt@1.8em{%
+                \hss\@textsuperscript{\normalfont\@thefnmark}}##1}%
+    \if@twocolumn
+      \ifnum \col@number=\@ne
+        \@maketitle
+      \else
+        \twocolumn[\@maketitle]%
+      \fi
+    \else
+      \global\@topnum\z@   % Prevents figures from going at top of page.
+      \@maketitle
+    \fi
+    \thispagestyle{headings}
+ \@thanks
+  \endgroup
+  \setcounter{footnote}{0}%
+  \global\let\thanks\relax
+  \global\let\maketitle\relax
+  \global\let\@maketitle\relax
+  \global\let\@thanks\@empty
+  \global\let\@author\@empty
+  \global\let\@date\@empty
+  \global\let\@title\@empty
+  \global\let\title\relax
+  \global\let\author\relax
+  \global\let\date\relax
+  \global\let\and\relax
+}
+
+\def\@articlesubtitle{}
+\def\subtitle#1{\def\@articlesubtitle{#1}}
+
+\def\@equalcontrib{}
+\def\equalcontrib#1{\def\@equalcontrib{#1}}
+
+  \let\footnotesize\normalsize
+      \long\def\@makefntext#1{\parindent 1em\noindent
+              \hb@xt@1.8em{%
+                \hss\@textsuperscript{\normalfont\@thefnmark}}\onehalfspacing#1}
+
+\def\@GeneralInstruction{}
+\def\GeneralInstruction{\def\@GeneralInstruction{\vbox{\fboxsep=6pt\fbox{\vbox{\hsize=458pt[Use this template to prepare research and review papers in Overleaf for submission to any ASM journal except Microbiology Resource Announcements (MRA) and the Journal of Microbiology and Biology Education (JMBE). Replace all instructional wording below with the actual text of your manuscript, following the format as laid out here and deleting any elements that do not apply. Different article types have different formatting requirements and not all variations are captured in this template. Refer to the \href{https://journals.asm.org/links-to-journal-author-instructions}{\underline{specific instructions for individual journals}}, especially the pages on Submission and Review Process and Article Types, to understand the relevant formatting elements.]}}}\par\nointerlineskip\vspace*{2.5pc}
+}}
+
+\def\@maketitle{%
+\setlength{\footnotesep}{9.9pt}
+  \null\thispagestyle{headings}
+\removelastskip\vskip0pt\vspace*{-44pt}\vbox{\hbox to\hsize{\smash{\lower24pt\hbox{\includegraphics[scale=2.1]{journals_logo_w_asm_logo_stacked_(1).jpg}}}\hfill\hbox{\fontsize{12}{0}\selectfont\Secondcolor{\bfseries\@ArticleType}}}}
+\begingroup \removelastskip\vspace*{4.5em}
+  \begin{flushleft}\parskip=0pt%
+\@GeneralInstruction%
+  \let \footnote \thanks\lineskip=12pt%
+    {\fontsize{22}{24}\selectfont\bfseries\boldmath\Secondcolor{\@title}\par}%
+\if!\@articlesubtitle!\relax\par\nointerlineskip%
+\else\par\nointerlineskip\vskip2pc\bgroup\lineskip=12pt\fontsize{18}{20}\selectfont\textbf{\@articlesubtitle}\egroup\par\nointerlineskip\fi
+    \vskip 2.5em
+\if@DoubleBlind\relax\else    {\large
+      \lineskip .5em%
+{\fontsize{12pt}{14pt}\selectfont\bfseries\boldmath\@asmauthor}\par
+{\fontsize{12pt}{14pt}\selectfont\mdseries\@asmaffil}\par
+}\par%\lineskip .5em\@equalcontrib%
+\if!\@equalcontrib!\relax\vskip1pc\else\vskip.5pc\lineskip.5em\normalsize\@equalcontrib\vskip1pc\fi%
+\normalsize
+\if!\@corraddress!\relax\vskip1pc\else\vskip.5pc\lineskip.5em\normalsize\@corraddress\vskip1pc\fi%
+\if!\@presentaddress!\relax\vskip1pc\else\vskip.5pc\lineskip.5em\normalsize\@presentaddress\vskip1pc\fi%
+\if!\@corresp!\relax\vskip1pc\else\vskip.5pc\lineskip.5em\normalsize\@corresp\vskip1pc\fi%
+\fi
+  \end{flushleft}%
+\endgroup}
+
+\def\Articleraggedright{%  non-hyphenated raggedright
+  \@flushglue=0pt plus 1fil%
+  \@rightskip\@flushglue \rightskip\@rightskip%
+  \leftskip\z@skip%
+  \parindent\z@}%
+
+\Articleraggedright%Flush Left Paragraph
+\setlength{\parindent}{18pt}
+\setlength{\parskip}{.5\baselineskip}
+%%%%%%%%%%%%%%%%ArticleTitle End
+  \renewenvironment{abstract}{\begingroup\parskip=.5\baselineskip\pagestyle{headings}%
+      \if@twocolumn%
+        \section*{\abstractname}%
+      \else%
+{\raggedright\bfseries\Secondcolor{\abstractname}\vphantom{py}}\par\nointerlineskip\ifonehalfspacing\vspace*{12pt}\else\vspace*{6pt}\fi\noindent%
+      \fi}%
+      {\endgroup\if@twocolumn\else\vskip\baselineskip\fi}%
+
+  \newenvironment{importance}{%
+      \if@twocolumn%
+        \section*{\importancename}%
+      \else%
+\removelastskip\par\nointerlineskip\vskip18pt%
+{\raggedright\bfseries\Secondcolor{\importancename}\vphantom{yp}}\par\nointerlineskip\ifonehalfspacing\vspace*{12pt}\else\vspace*{6pt}\fi\noindent%
+      \fi}%
+      {\if@twocolumn\else\fi}%
+
+  \newenvironment{keywords}{\begingroup\parindent=0pt\parskip=0pt%
+      \if@twocolumn
+        \section*{\keywordname}%
+      \else
+\removelastskip\par\nointerlineskip\vskip14pt%
+{\raggedright\bfseries\Secondcolor{\keywordname}\vphantom{yp}}\par\nointerlineskip\ifonehalfspacing\vspace*{12pt}\else\vspace*{6pt}\fi\noindent%
+      \fi}
+      {\endgroup\if@twocolumn\else
+\par\nointerlineskip\vskip12pt\noindent\rule{\textwidth}{0.5pt}
+\fi}
+
+  \long\def\keywords#1{\bgroup\parindent=0pt\parskip=0pt%
+      \if@twocolumn
+        \section*{\keywordname}%
+      \else
+\removelastskip\par\nointerlineskip\vskip14pt%
+{\raggedright\bfseries\Secondcolor{\keywordname}\vphantom{yp}}\par\nointerlineskip\ifonehalfspacing\vspace*{12pt}\else\vspace*{6pt}\fi\noindent%
+      \fi
+#1\nobreak\par\nobreak\nointerlineskip\vskip12pt\nobreak\noindent\rule{\textwidth}{0.5pt}
+\egroup}
+
+
+%%%%%%%%%%%%%%%%%Heading-Level%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\raggedcenter{\leftskip=0pt plus 0.5fil\rightskip=0pt plus 0.5fil%
+\parfillskip=0pt\let\hb=\break}%
+\def\@HIIIsepwithspace{}
+
+\def\log{\mathop{\rm log}\nolimits}
+
+\def\@startsection#1#2#3#4#5#6{%
+  \if@noskipsec\leavevmode\fi%
+  \par%
+  \@tempskipa #4\relax%
+  \@afterindenttrue%
+  \ifdim \@tempskipa <\z@%
+    \@tempskipa -\@tempskipa \@afterindenttrue%
+  \fi%
+  \if@nobreak%
+    \everypar{}%
+  \else%
+    \addpenalty\@secpenalty\addvspace\@tempskipa%
+  \fi%
+  \@ifstar%
+    {\@ssect{#3}{#4}{#5}{#6}}%
+    {\@dblarg{\@sect{#1}{#2}{#3}{#4}{#5}{#6}}}}%
+
+\setcounter{secnumdepth}{0}
+
+\newcount\appseccnt%
+\appseccnt=0%
+\def\@seccntformat#1{\Secondcolor{\csname the#1\endcsname}\ifnum\appseccnt=1\relax\hskip0.5em\else\ignorespaces\hskip6pt\ignorespaces\fi}
+
+\def\@sect#1#2#3#4#5#6[#7]#8{%
+  \ifnum #2>\c@secnumdepth
+    \let\@svsec\@empty
+  \else
+    \refstepcounter{#1}%
+    \protected@edef\@svsec{\@seccntformat{#1}\relax}%
+  \fi
+\@tempskipa #5\relax
+\ifdim \@tempskipa>\z@
+\ifnum #2=1%
+\begingroup%
+\ifnum\appseccnt=1\relax
+#6{{\hskip #3\relax\@svsec}%
+\interlinepenalty \@M {\Secondcolor{#8}}\vphantom{\llap{yqlh}}\@@par\nobreak}%
+\else
+#6{{\hskip #3\relax\@svsec}%
+\interlinepenalty \@M {\Secondcolor{#8}}\vphantom{\llap{yqlh}}\@@par\nobreak}\fi%
+\endgroup
+\else%
+\ifnum #2=2%
+\begingroup%
+#6{{\hskip #3\relax\@svsec}%
+\interlinepenalty \@M \Secondcolor{#8}\vphantom{\llap{yqlh}}\@@par\nobreak}%
+\endgroup
+\else%
+\ifnum #2=3%
+\begingroup
+#6{{\hskip#3\relax\@svsec}%
+\interlinepenalty\@M{\Secondcolor{#8}}\vphantom{\llap{yqlh}}\@@par\nobreak}%
+\endgroup
+\else%
+\ifnum #2=4%
+\begingroup
+#6{{\hskip #3\relax\@svsec}%
+\interlinepenalty\@M{\Secondcolor{#8}}\vphantom{\llap{yqlh}}\@@par\nobreak}%
+\endgroup
+\else
+\ifnum #2=5%
+\begingroup
+#6{\@hangfrom{\hskip #3\relax\@svsec}%
+\interlinepenalty \@M {\Secondcolor{#8}}\vphantom{\llap{yqlh}}\@@par\nobreak}%
+\endgroup
+\else%
+  \undefine
+\fi\fi\fi\fi\fi%
+\else%
+\def\@svsechd{\ifnum#2=3%
+#6{{\hskip#3\relax\@svsec}{\Secondcolor{#8}}\vphantom{\llap{yqlh}}\@@par\nobreak}%
+\else%
+\ifnum #2=4%
+#6{\hskip #3\relax%
+\@svsec{\Secondcolor{#8}}\@@par\nobreak}%
+\else%
+\ifnum #2=5%
+#6{\hskip #3\relax%
+\@svsec \Secondcolor{#8}\@@par\nobreak}%
+\else
+#6{\hskip #3\relax\@svsec #8\@@par}%
+\fi\fi\fi%
+}%
+\fi%
+\@xsect{#5}}%
+
+\def\@xsect#1{%
+\@tempskipa#1\relax%
+\ifdim \@tempskipa>\z@%
+\par\nobreak%
+\vskip\@tempskipa%
+\@afterheading%
+\else%
+\@nobreakfalse%
+\global\@noskipsectrue%
+\everypar{%
+\if@noskipsec%
+\global\@noskipsecfalse%
+{\setbox\z@\lastbox}%
+\clubpenalty\@M%
+\begingroup\hskip-2.5pt\@svsechd\endgroup%
+\unskip%
+\@tempskipa#1\relax%
+\hskip-\@tempskipa%
+\else%
+\clubpenalty\@clubpenalty%
+\everypar{}%
+\fi}%
+\fi\ignorespaces}
+
+\let\sectitle=Z%
+\let\subsectitle=Z%
+\let\subsubsectitle=Z%
+\let\paratitle=Z%
+\let\subparatitle=Z%
+
+\def\@ssect#1#2#3#4#5{%
+\@tempskipa #3\relax
+\ifdim \@tempskipa>\z@
+\begingroup
+#4{%
+\@hangfrom{\hskip#1}%
+\ifx A\sectitle%%
+{\interlinepenalty \@M{\Secondcolor{#5}}\@@par}
+\else
+\ifx A\subsectitle%
+{\interlinepenalty \@M \Secondcolor{#5}\@@par}
+\else
+\ifx A\subsubsectitle%
+{\interlinepenalty \@M{\Secondcolor{#5}}\@@par}
+\else
+\ifx A\paratitle
+{\interlinepenalty \@M{\Secondcolor{#5}}\@@par}
+\else
+\ifx A\subparatitle%
+{\interlinepenalty\@M\Secondcolor{#5}\@@par}
+\else
+{\interlinepenalty \@M\Secondcolor{#5}\@@par}
+\fi\fi\fi\fi\fi%
+}%
+\endgroup%
+\else
+\def\@svsechd{#4{\hskip #1\relax \Secondcolor{#5}\@HIIIsepwithspace}}%
+\fi
+\@xsect{#3}}
+
+\newskip\hibelowskip
+\hibelowskip=2.3ex \@plus.2ex
+\advance\hibelowskip by -.5\baselineskip
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {\hibelowskip}%
+                                   {\parindent=0pt\fontsize{14}{16}\selectfont\bfseries\boldmath}}%
+
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {\hibelowskip}%
+                                     {\parindent=0pt\normalfont\bfseries\boldmath}}
+
+\newskip\hiiibelowskip
+\hiiibelowskip=1.3ex \@plus.2ex
+\advance\hiiibelowskip by -.5\baselineskip
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {\hibelowskip}%
+                                     {\parindent=0pt\normalfont\normalsize\bfseries\itshape\boldmath}}
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+                                    {3.25ex \@plus1ex \@minus.2ex}%
+                                     {\hiiibelowskip}%
+                                    {\parindent=0pt\normalfont\normalsize\bfseries\boldmath\noindent}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\z@}%
+                                       {3.25ex \@plus1ex \@minus .2ex}%
+                                       {\hiiibelowskip}%
+                                      {\parindent=0pt\normalfont\normalsize\bfseries\boldmath}}
+
+%%%%%%%%%%%%%%%%%Heading-Level End%%%%%%%%%%%%%%%%
+%%%%%%%%%%Appendix
+
+%%%%%%%%%%%%%%%%% custom commands to italicize gene and species names
+\newcommand{\Btheta}{\textit{B.~theta}}
+\newcommand{\Ecoli}{\textit{E.~coli}}
+\newcommand{\Bacteroides}{\textit{Bacteroides}}
+\newcommand{\Proteobacteria}{\textit{Proteobacteria}}
+\newcommand{\oriV}{\textit{oriV}}
+\newcommand{\trfA}{\textit{trfA}}
+\newcommand{\oriT}{\textit{oriT}}
+\newcommand{\ermF}{\textit{ermF}}
+\newcommand{\repA}{\textit{repA}}
+\newcommand{\chuR}{\textit{chuR}}
+\newcommand{\anSME}{\textit{anSME}}
+\newcommand{\recA}{\textit{recA}}
+\newcommand{\tdk}{\textit{tdk}}
+\newcommand{\rnpB}{\textit{rnpB}}
+\newcommand{\ilvGEDA}{\textit{ilvGEDA}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% custom commands to italicize gene and species names  END
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Miscellaneous Start
+\newenvironment{fullwidth}{\begingroup}{\endgroup}
+\newenvironment{acknowledgments}{\begingroup\if@DoubleBlind\setbox0\vbox\bgroup\fi}{\if@DoubleBlind\egroup\fi\endgroup}
+\newenvironment{funding}{\begingroup\if@DoubleBlind\setbox0\vbox\bgroup\fi}{\if@DoubleBlind\egroup\fi\endgroup}
+\newenvironment{conflictsinterest}{\begingroup\if@DoubleBlind\setbox0\vbox\bgroup\fi}{\if@DoubleBlind\egroup\fi\endgroup}
+\newenvironment{authorbios}{\begingroup\if@DoubleBlind\setbox0\vbox\bgroup\fi}{\if@DoubleBlind\egroup\fi\endgroup}
+\newenvironment{authorfootnotes}{\begingroup\if@DoubleBlind\setbox0\vbox\bgroup\fi}{\if@DoubleBlind\egroup\fi\endgroup}
+\newenvironment{authorcontributions}{\begingroup\if@DoubleBlind\setbox0\vbox\bgroup\fi}{\if@DoubleBlind\egroup\fi\endgroup}
+\renewcommand\textsc{}
+\renewcommand\sc{}
+
+\def\headrowfillerT{}
+\def\headrow{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Miscellaneous End
+
+\renewcommand{\figurename}{\textbf{FIG}}
+\renewcommand\thefigure{\textbf{\@arabic\c@figure}}
+
+%%*************************** Table *********************************
+
+\renewenvironment{table}[1][]{%
+\renewcommand*{\arraystretch}{1.5}
+\@float{table}\fontsize{10pt}{18pt}\selectfont}{\end@float}
+
+\renewcommand{\tablename}{\textbf{TABLE}}
+\renewcommand\thetable{\textbf{\@arabic\c@table}}
+
+\belowbottomsep=4pt%
+\belowcaptionskip=8pt%
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{\leftskip2pc\rightskip2pc plus 1fil\parfillskip=0pt\relax\baselineskip=18pt#1. #2}%
+  \ifdim \wd\@tempboxa >\hsize
+\leftskip2pc\rightskip2pc plus 1fil\parfillskip=0pt\relax%
+\baselineskip=18pt#1. #2\par
+  \else
+    \global \@minipagefalse
+    \hb@xt@\hsize{\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+
+\long\def\nifigmakecaption#1{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{\leftskip2pc\rightskip2pc plus 1fil\parfillskip=0pt\relax\baselineskip=18pt\fnum@figure\quad#1}%
+  \ifdim \wd\@tempboxa >\hsize
+\leftskip2pc\rightskip2pc plus 1fil\parfillskip=0pt\relax%
+\baselineskip=18pt\fnum@figure\quad#1\par
+  \else
+    \global \@minipagefalse
+    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+
+\long\def\nifigcaption#1{%
+  \par
+  \begingroup
+    \@parboxrestore
+    \normalsize
+    \nifigmakecaption{#1}\par
+  \endgroup}
+
+\renewenvironment{figure}[1][]{\refstepcounter{figure}\let\caption\nifigcaption}{}
+
+\long\def\nitabmakecaption#1{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{\leftskip2pc\rightskip2pc plus 1fil\parfillskip=0pt\relax\baselineskip=18pt\fnum@table\quad#1}%
+  \ifdim \wd\@tempboxa >\hsize
+\leftskip2pc\rightskip2pc plus 1fil\parfillskip=0pt\relax%
+\baselineskip=18pt\fnum@table\quad#1\par\nobreak
+  \else
+    \global \@minipagefalse
+    \hb@xt@\hsize{\box\@tempboxa\hfil}%
+  \fi
+  \vspace*{\belowcaptionskip}}
+
+\long\def\nitabcaption#1{%
+  \par
+  \begingroup
+    \@parboxrestore
+    \normalsize
+    \nitabmakecaption{#1}\par
+  \endgroup}
+
+\renewenvironment{table}[1][]{\refstepcounter{table}\let\caption\nitabcaption}{\par\nointerlineskip\vspace*{18pt}}
+
+
+%%*************************** BOX *********************************
+
+\definecolor{shadecolor}{cmyk}{0,0,0,0.10}
+
+
+%%***********************************Bibliograpy%%%%%%%%%%%%%%%%%
+
+\newcommand{\JournalTitle}[1]{\textit{#1\/}}
+
+%%***********************************Bibliograpy%%%%%%%%%%%%%%%%%
+\urlstyle{rm}
+\def\asmafn#1{${}^{\mathrm{#1}}$}
+\let\afn\asmafn
+
+\newcommand{\R}[1]{\label{#1}\linelabel{#1}}
+
+\usepackage[plain]{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{natbib}
+\usepackage[acronym,nomain]{glossaries}
+\usepackage{comment}
+
+\renewcommand\abstractname{ABSTRACT}
+\newcommand\importancename{IMPORTANCE}
+\newcommand\keywordname{Keywords}
+\def\verbatim@font{\normalfont%
+\hyphenchar\font\m@ne
+\@noligs}
+
+%</class>
+%
+%%%    \end{macrocode}
+%
+%%% This brings us to the end of \cls{asm.cls}.
+%
+%%% \subsection{The 9pt style file}
+%%% 
+%%% This is the package \pkg{asm9pt.sty}, it provides 9pt font settings
+%%% for simulation of journal articles/notes.  It is essentially
+%%% a hack of size10.clo (a the standard \LaTeX{} class option).
+%
+%%%    \begin{macrocode}
+%
+%<*style>
+
+%</style>
+%
+%%%    \end{macrocode}
+%
+%%% This brings us to the end of \pkg{asm9pt.sty}.
+%
+%%% \subsection{asm Bibliographic Style File}
+%
+%%%    \begin{macrocode}
+%
+%<*bibstyle>
+%
+%% msystems.bst updated on 19 January 2020 by Overleaf
+%% to implement changes required by ASM. Among them,
+%% three new entry types are defined: patent, 
+%% dataset and confabstract. 
+%%
+%% RENAMED TO msystems.bst ON 12 JULY 2019,
+%% following changes by Overleaf to
+%% move publication year to after authors upon ASM
+%% request. Also made author names bold.
+
+%% vancouver-asm.bst (23 Aug 2017) is modified
+%% by LianTze Lim (Overleaf)
+%% from the
+%% natbib-compatible BibTeX bibliography style `vancouver-authoryear' at  https://github.com/gbhutani/vancouver_authoryear_bibstyle/
+
+%% Use
+%%
+%% \usepackage{natbib}
+%% \bibliographystyle{vancouver-compatible}
+%%
+%% and cite references with (e.g.)
+%%
+%% \cite{smith77}       % to get a "[1]" in the text
+%% \citep{smith77}      % to get a "[1]" in the text
+%% \citet{smith77}      % to get a "Smith [1]" in the text
+%% \citeauthor{smith77} % to get a "Smith" in the text
+%%
+%% The changes below are inspired by similar changes made to
+%% splncs03.bst by Maurizio "Titto" Patrignani of
+%% Dipartimento di Informatica e Automazione Universita' Roma Tre.
+%% Unfortunately, splncs03.bst was not compatible with natbib (because it
+%% was not built with author-year capability).
+%%
+%% This is derived from `splncsnat.bst',
+%---------------------------------------------------------------------
+ENTRY
+  { address
+    author
+    booktitle    % for articles in books
+    chapter      % for incollection, esp. internet documents
+    day
+    edition
+    editor
+    eid
+    howpublished
+    institution  % for technical reports
+    location     % for patents
+    journal
+    key
+    month
+    note
+    number
+    organization
+    pages
+    part
+    publisher
+    school
+    series
+    title
+    type
+    url
+    urldate
+    volume
+    word
+    year
+    doi
+  }
+  {}
+  { label extra.label sort.label short.list }
+INTEGERS { output.state before.all mid.sentence after.sentence after.block }
+FUNCTION {init.state.consts}
+{ #0 'before.all :=
+  #1 'mid.sentence :=
+  #2 'after.sentence :=
+  #3 'after.block :=
+}
+%% Declaration of string variables
+STRINGS { s t}
+FUNCTION {output.nonnull}
+{ 's :=
+  output.state mid.sentence =
+    { ", " * write$ }
+    { output.state after.block =
+        { add.period$ write$
+          newline$
+          "\newblock " write$
+        }
+        { output.state before.all =
+            'write$
+            {  " " * write$ }
+          if$
+        }
+      if$
+      mid.sentence 'output.state :=
+    }
+  if$
+  s
+}
+FUNCTION {output}
+{ duplicate$ empty$
+    'pop$
+    'output.nonnull
+  if$
+}
+
+FUNCTION {output.check}
+{ 't :=
+  duplicate$ empty$
+    { pop$ "empty " t * " in " * cite$ * warning$ }
+    'output.nonnull
+  if$
+}
+
+%FUNCTION {fin.entry}
+%{ duplicate$ empty$
+%%%    'pop$
+%%%    'write$
+%%%  if$
+%%%  newline$
+%}
+%
+FUNCTION {fin.entry}
+{ add.period$
+  write$
+  newline$
+}
+
+FUNCTION {new.block}
+{ output.state before.all =
+    'skip$
+    { after.block 'output.state := }
+  if$
+}
+
+FUNCTION {new.sentence}
+{ output.state after.block =
+    'skip$
+    { output.state before.all =
+        'skip$
+        { after.sentence 'output.state := }
+      if$
+    }
+  if$
+}
+
+FUNCTION {add.blank}
+{  " " * before.all 'output.state :=
+}
+
+FUNCTION {no.blank.or.punct}
+{  "" * before.all 'output.state :=
+}
+
+FUNCTION {add.semicolon}
+{
+  ";" *
+  no.blank.or.punct
+}
+
+FUNCTION {date.block}
+{
+  "." *
+  no.blank.or.punct
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%            LOGICAL `NOT', `AND', AND `OR'                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Logical 'not':
+%%% If the first element on the stack is A then this function
+%%% does the following:
+%%%     push { #0 }
+%%%     push { #1 }
+%%% So now the first 3 elements of the stack are
+%%%     { #1 } { #0 } A
+%%% The first 3 are popped and subjected to 'if':
+%%% If A > 0 then { #0 } is executed, else { #1 } is executed:
+%%%     if A > 0
+%%%     then 0
+%%%     else 1
+%%% So consider integers as logicals, where 1 = true and 0 = false,
+%%% then this does
+%%%     (if A then false else true)
+%%% which is a logical 'not'.
+
+FUNCTION {not}
+{   { #0 }
+    { #1 }
+  if$
+}
+FUNCTION {and}
+{   'skip$
+    { pop$ #0 }
+  if$
+}
+FUNCTION {or}
+{   { pop$ #1 }
+    'skip$
+  if$
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  GENERAL PURPOSE FUNCTIONS FOR FORMATTING                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% issues warning if field is empty
+%%% call with
+%%%    "field"  field  warning.if.empty
+%%% Note that the first field must be between quotes
+%%% because it is the fieldname for use in the warning message.
+%
+
+FUNCTION {warning.if.empty}
+{ empty$
+    { "No "  swap$ * " in " * cite$ * warning$ }
+    { pop$ }
+  if$
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %
+    % encloses string in pre- and postfix string
+    % call with
+    %    prefix postfix  S  enclose.check
+    % delivers empty string if S empty
+    %
+FUNCTION {enclose.check}
+{ duplicate$ empty$
+    { pop$ pop$ pop$
+      ""
+    }
+    { swap$ * * }
+  if$
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%% emphasizes top of stack
+%%% call with
+%%%    string" emphasize.check
+%
+
+FUNCTION {emphasize.check}
+{ "\emph{" swap$
+  "}"     swap$
+  enclose.check
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %
+    % brackets top of stack
+    % call with
+    %     "string" bracket.check
+    %
+FUNCTION {bracket.check}
+{ "[" swap$
+  "]" swap$
+  enclose.check
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %
+    % parenthesizes top of stack
+    % call with
+    %     "string" parenthesize
+    %
+FUNCTION {parenthesize.check}
+{ "(" swap$
+  ")" swap$
+  enclose.check
+}
+
+STRINGS {z}
+
+FUNCTION {remove.dots}
+{ 'z :=	% expects string on top of the stack, pops the string and assigns it to variable z
+  "" % push empty string
+  { z empty$ not } % returns 0 if variable z is empty
+  { z #1 #1 substring$ % push the first character of variable z
+    z #2 global.max$ substring$ 'z := % assigns the 2nd to last character of variable z to variable z
+    duplicate$ "\" = % pushes 1 if the last character is "\", otherwise 0
+    { * % concatenates the last 2 literals
+      z #1 #1 substring$ % push the first character of variable z
+      z #2 global.max$ substring$ 'z := % assigns the 2nd to last character of variable z to variable z
+      * % concatenates the last 2 literals, i.e. every character, even a dot, following a "\" will be printed
+    }
+    { duplicate$ "." = % pushes 1 if the last character is ".", otherwise 0
+      'pop$ %  pushes the pop$ function
+      { * } % concatenates the last 2 literals
+    if$ % pops the last character if it is a dot, otherwise concatenates it with the string on top of the stack
+    }
+    if$
+  }
+  while$
+}
+
+INTEGERS {l}
+FUNCTION{string.length}
+{
+  #1 'l :=
+  { duplicate$ duplicate$ #1 l substring$ = not }
+    { l #1 + 'l := }
+  while$
+  pop$ l
+}
+
+STRINGS {replace find text}
+INTEGERS {find_length}
+FUNCTION {find.replace}
+{
+  'replace :=
+  'find :=
+  'text :=
+  find string.length 'find_length :=
+  ""
+    { text empty$ not }
+    { text #1 find_length substring$ find =
+      {
+        replace *
+        text #1 find_length + global.max$ substring$ 'text :=
+      }
+      { text #1 #1 substring$ *
+        text #2  global.max$ substring$ 'text :=
+      }
+    if$
+    }
+  while$
+}
+
+FUNCTION {new.block.checka}
+{ empty$
+    'skip$
+    'new.block
+  if$
+}
+
+FUNCTION {new.block.checkb}
+{ empty$
+  swap$ empty$
+  and
+    'skip$
+    'new.block
+  if$
+}
+
+FUNCTION {new.sentence.checka}
+{ empty$
+    'skip$
+    'new.sentence
+  if$
+}
+
+FUNCTION {new.sentence.checkb}
+{ empty$
+  swap$ empty$
+  and
+    'skip$
+    'new.sentence
+  if$
+}
+
+FUNCTION {field.or.null}
+{ duplicate$ empty$
+    { pop$ "" }
+    'skip$
+  if$
+}
+
+FUNCTION {emphasize}
+{ skip$ }
+
+FUNCTION {tie.or.space.prefix}
+{ duplicate$ text.length$ #3 <
+    { "~" }
+    { " " }
+  if$
+  swap$
+}
+
+FUNCTION {capitalize}
+{ "u" change.case$ "t" change.case$ }
+
+FUNCTION {space.word}
+{ " " swap$ * " " * }
+
+ % Here are the language-specific definitions for explicit words.
+ % Each function has a name bbl.xxx where xxx is the English word.
+ % The language selected here is ENGLISH
+
+FUNCTION {bbl.and}
+{ "and"}
+
+FUNCTION {bbl.etal}
+{ "et~al." }
+
+FUNCTION {bbl.editors}
+{ "(ed)" }
+
+FUNCTION {bbl.editor}
+{ "(ed)" }
+
+FUNCTION {bbl.edby}
+{ "edited by" }
+
+FUNCTION {bbl.edition}
+{ "ed" }
+
+FUNCTION {bbl.volume}
+{ "vol" }
+
+FUNCTION {bbl.of}
+{ "of" }
+
+FUNCTION {bbl.number}
+{ "no" }
+
+FUNCTION {bbl.nr}
+{ "no" }
+
+FUNCTION {bbl.in}
+{ "in" }
+
+FUNCTION {bbl.pages}
+{ "p" }
+
+FUNCTION {bbl.page}
+{ "p" }
+
+FUNCTION {bbl.chapter}
+{ "chap" }
+
+FUNCTION {bbl.techrep}
+{ "Tech Rep" }
+
+FUNCTION {bbl.mthesis}
+{ "Master's thesis" }
+
+FUNCTION {bbl.phdthesis}
+{ "PhD thesis" }
+
+FUNCTION {bbl.patent}
+{ "patent" }
+
+FUNCTION {bbl.acc.number}
+{ "accession no." }
+
+FUNCTION {bbl.acc.number.none}
+{ "accession number requested" }
+
+FUNCTION {bbl.abstract}
+{ "abstr" }
+
+FUNCTION {bbl.inpress}
+{ "in press" }
+
+FUNCTION {bbl.first}
+{ "1st" }
+
+FUNCTION {bbl.second}
+{ "2nd" }
+
+FUNCTION {bbl.third}
+{ "3rd" }
+
+FUNCTION {bbl.fourth}
+{ "4th" }
+
+FUNCTION {bbl.fifth}
+{ "5th" }
+
+FUNCTION {bbl.st}
+{ "st" }
+
+FUNCTION {bbl.nd}
+{ "nd" }
+
+FUNCTION {bbl.rd}
+{ "rd" }
+
+FUNCTION {bbl.th}
+{ "th" }
+
+MACRO {jan} {"Jan."}
+
+MACRO {feb} {"Feb."}
+
+MACRO {mar} {"Mar."}
+
+MACRO {apr} {"Apr."}
+
+MACRO {may} {"May"}
+
+MACRO {jun} {"Jun."}
+
+MACRO {jul} {"Jul."}
+
+MACRO {aug} {"Aug."}
+
+MACRO {sep} {"Sep."}
+
+MACRO {oct} {"Oct."}
+
+MACRO {nov} {"Nov."}
+
+MACRO {dec} {"Dec."}
+
+FUNCTION {eng.ord}
+{ duplicate$ "1" swap$ *
+  #-2 #1 substring$ "1" =
+     { bbl.th * }
+     { duplicate$ #-1 #1 substring$
+       duplicate$ "1" =
+         { pop$ bbl.st * }
+         { duplicate$ "2" =
+             { pop$ bbl.nd * }
+             { "3" =
+                 { bbl.rd * }
+                 { bbl.th * }
+               if$
+             }
+           if$
+          }
+       if$
+     }
+   if$
+}
+
+FUNCTION {bibinfo.check}
+{ swap$
+  duplicate$ missing$
+    {
+      pop$ pop$
+      ""
+    }
+    { duplicate$ empty$
+        {
+          swap$ pop$
+        }
+        { swap$
+          pop$
+        }
+      if$
+    }
+  if$
+}
+
+FUNCTION {bibinfo.warn}
+{ swap$
+  duplicate$ missing$
+    {
+      swap$ "missing " swap$ * " in " * cite$ * warning$ pop$
+      ""
+    }
+    { duplicate$ empty$
+        {
+          swap$ "empty " swap$ * " in " * cite$ * warning$
+        }
+        { swap$
+          pop$
+        }
+      if$
+    }
+  if$
+}
+INTEGERS { nameptr namesleft numnames }
+
+
+STRINGS  { bibinfo}
+
+FUNCTION {format.names}
+{ 'bibinfo :=
+  duplicate$ empty$ 'skip$ {
+  "." ". " find.replace 's :=
+  "" 't :=
+  #1 'nameptr :=
+  s num.names$ 'numnames :=
+  numnames 'namesleft :=
+    { namesleft #0 > }
+    { s nameptr
+      "{vv~}{ll}{ f{}}{ jj}"
+      format.name$
+      remove.dots
+      bibinfo bibinfo.check
+      't :=
+      nameptr #1 >
+         {
+%% 31 Aug 2017: Don't abbreviate, list all authors
+%%%           nameptr #6
+%%%           #1 + =
+%%%           numnames #6
+%%%           > and
+%%%             { "others" 't :=
+%%%               #1 'namesleft := }
+%%%             'skip$
+%%%           if$
+          namesleft #1 >
+            { ", " * t * }
+            {
+              "," *
+              s nameptr "{ll}" format.name$ duplicate$ "others" =
+                { 't := }
+                { pop$ }
+              if$
+              t "others" =
+                {
+                  " " * bbl.etal *
+                }
+                { " " * t * }
+              if$
+            }
+          if$
+        }
+        't
+      if$
+      nameptr #1 + 'nameptr :=
+      namesleft #1 - 'namesleft :=
+    }
+  while$
+  } if$
+}
+
+FUNCTION {format.names.org}
+{ 'bibinfo :=
+  duplicate$ empty$ 'skip$ {
+  's :=
+  "" 't :=
+  #1 'nameptr :=
+  s num.names$ 'numnames :=
+  numnames 'namesleft :=
+    { namesleft #0 > }
+    { s nameptr
+      "{ff~}{vv~}{ll}"
+      format.name$
+      bibinfo bibinfo.check
+      't :=
+      nameptr #1 >
+        {
+          namesleft #1 >
+            { "; " * t * }
+            {
+              ";" *
+              s nameptr "{ll}" format.name$ duplicate$ "others" =
+                { 't := }
+                { pop$ }
+              if$
+              t "others" =
+                {
+                  " " * bbl.etal *
+                }
+                { " " * t * }
+              if$
+            }
+          if$
+        }
+        't
+      if$
+      nameptr #1 + 'nameptr :=
+      namesleft #1 - 'namesleft :=
+    }
+  while$
+  } if$
+}
+
+FUNCTION {format.names.ed}
+{
+  format.names
+}
+FUNCTION {format.key}
+{ empty$
+    { key field.or.null }
+    { "" }
+  if$
+}
+
+FUNCTION {format.authors}
+{
+  author "author" format.names
+  %% "." *
+  "\textbf{" swap$ * "}" *
+  %%"." " " "author" find.replace format.names
+}
+
+FUNCTION {format.organizations}
+{ organization "organization" format.names.org
+}
+
+FUNCTION {get.bbl.editor}
+{ editor num.names$ #1 > 'bbl.editors 'bbl.editor if$ }
+
+FUNCTION {format.editors}
+{ editor "editor" format.names duplicate$ empty$ 'skip$
+    {
+      "," *
+      " " *
+      get.bbl.editor
+      *
+    }
+  if$
+}
+
+FUNCTION {format.doi.url}
+{
+  doi empty$
+    {
+      url empty$
+        { "" }
+        {
+          "\urlprefix\url{" url * "}" *
+          new.block
+          urldate empty$
+            'skip$
+            {
+              ". Retrieved " * urldate *
+              new.block
+            }
+          if$
+        }
+      if$
+    }
+    { "\doiprefix\doi{" doi * "}" * }
+  if$
+}
+
+FUNCTION {format.note}
+{
+  note empty$
+    { "" }
+    { note #1 #1 substring$
+      duplicate$ "{" =
+        'skip$
+        { output.state mid.sentence =
+          { "l" }
+          { "u" }
+        if$
+        change.case$
+        }
+      if$
+      note #2 global.max$ substring$ * "note" bibinfo.check
+    }
+  if$
+}
+
+FUNCTION {format.title}
+{ title "title" bibinfo.check
+}
+
+
+FUNCTION {author.editor.key.full}
+{ author empty$
+    { editor empty$
+        { key empty$
+            { cite$ #1 #3 substring$ }
+            'key
+          if$
+        }
+        { editor }
+      if$
+    }
+    { author }
+  if$
+}
+
+FUNCTION {author.key.full}
+{ author empty$
+    { key empty$
+         { cite$ #1 #3 substring$ }
+          'key
+      if$
+    }
+    { author }
+  if$
+}
+
+FUNCTION {editor.key.full}
+{ editor empty$
+    { key empty$
+         { cite$ #1 #3 substring$ }
+          'key
+      if$
+    }
+    { editor }
+  if$
+}
+
+FUNCTION {make.full.names}
+{ type$ "book" =
+  type$ "inbook" =
+  or
+    'author.editor.key.full
+    { type$ "proceedings" =
+        'editor.key.full
+        'author.key.full
+      if$
+    }
+  if$
+}
+
+FUNCTION {output.bibitem}
+{ newline$
+  "\bibitem[{" write$
+  label write$
+  ")" make.full.names duplicate$ short.list =
+     { pop$ }
+     { * }
+   if$
+  "}]{" * write$
+  cite$ write$
+  "}" write$
+  newline$
+  ""
+  before.all 'output.state :=
+}
+
+FUNCTION {n.dashify}
+{
+  't :=
+  ""
+    { t empty$ not }
+    { t #1 #1 substring$ "-" =
+        { t #1 #2 substring$ "--" = not
+            { "--" *
+              t #2 global.max$ substring$ 't :=
+            }
+            {   { t #1 #1 substring$ "-" = }
+                { "-" *
+                  t #2 global.max$ substring$ 't :=
+                }
+              while$
+            }
+          if$
+        }
+        { t #1 #1 substring$ *
+          t #2 global.max$ substring$ 't :=
+        }
+      if$
+    }
+  while$
+}
+
+%% Updated 2019, Dec 17
+FUNCTION {word.in}
+{ bbl.in capitalize emphasize.check
+%%%  ":" *
+  " " * }
+
+FUNCTION {format.journal.date}
+{
+  month "month" bibinfo.check
+  duplicate$ empty$
+  year  "year"  bibinfo.check duplicate$ empty$
+    {
+      swap$ 'skip$
+      { "there's a month but no year in " cite$ * warning$ }
+      if$
+      *
+    }
+    { swap$ 'skip$
+        { %%%%% Dec 2019: swap to *month year*.
+          %" " * swap$
+          swap$ " " * swap$
+        }
+      if$
+      *
+      remove.dots
+    }
+  if$
+  duplicate$ empty$
+    'skip$
+    {
+      before.all 'output.state :=
+    after.sentence 'output.state :=
+    }
+  if$
+}
+
+FUNCTION {format.date}
+{
+  month "month" bibinfo.check
+  duplicate$ empty$
+  year  "year"  bibinfo.check duplicate$ empty$
+    { swap$ 'skip$
+        { "there's a month but no year in " cite$ * warning$ }
+      if$
+      *
+    }
+    { swap$ 'skip$
+        { %%%%% Dec 2019: swap to *month year*.
+          %swap$
+          %" " * swap$
+          swap$ " " * swap$
+        }
+      if$
+      *
+    }
+  if$
+}
+
+FUNCTION {format.btitle}
+{ title "title" bibinfo.check
+  duplicate$ empty$ 'skip$
+    {
+    }
+  if$
+}
+
+FUNCTION {either.or.check}
+{ empty$
+    'pop$
+    { "can't use both " swap$ * " fields in " * cite$ * warning$ }
+  if$
+}
+
+FUNCTION {format.bvolume}
+{ volume empty$
+    { "" }
+    { bbl.volume volume tie.or.space.prefix
+      "volume" bibinfo.check * *
+      series "series" bibinfo.check
+      duplicate$ empty$ 'pop$
+        { swap$ bbl.of space.word * swap$
+          emphasize * }
+      if$
+      "volume and number" number either.or.check
+    }
+  if$
+}
+
+FUNCTION {format.number.series}
+{ volume empty$
+    { number empty$
+        { series field.or.null }
+        { output.state mid.sentence =
+            { bbl.number }
+            { bbl.number capitalize }
+          if$
+          number tie.or.space.prefix "number" bibinfo.check * *
+          series empty$
+            { "there's a number but no series in " cite$ * warning$ }
+            { bbl.in space.word *
+              series "series" bibinfo.check *
+            }
+          if$
+        }
+      if$
+    }
+    { "" }
+  if$
+}
+
+FUNCTION {format.edition}
+{ edition duplicate$ empty$ 'skip$
+    {
+%%%      convert.edition
+      output.state mid.sentence =
+        { "l" }
+        { "t" }
+      if$ change.case$
+      "edition" bibinfo.check
+      " " * bbl.edition *
+    }
+  if$
+}
+INTEGERS { multiresult }
+FUNCTION {multi.page.check}
+{ 't :=
+  #0 'multiresult :=
+    { multiresult not
+      t empty$ not
+      and
+    }
+    { t #1 #1 substring$
+      duplicate$ "-" =
+      swap$ duplicate$ "," =
+      swap$ "+" =
+      or or
+        { #1 'multiresult := }
+        { t #2 global.max$ substring$ 't := }
+      if$
+    }
+  while$
+  multiresult
+}
+
+FUNCTION {format.pages}
+{ pages duplicate$ empty$ 'skip$
+    { duplicate$ multi.page.check
+        {
+          bbl.pages swap$
+          n.dashify
+        }
+        {
+          bbl.page swap$
+        }
+      if$
+      tie.or.space.prefix
+      "pages" bibinfo.check
+      * *
+    }
+  if$
+}
+
+FUNCTION {format.journal.pages}
+{ pages duplicate$ empty$ 'pop$
+    { swap$ duplicate$ empty$
+        { pop$ pop$ format.pages }
+        {
+          ":" *
+          swap$
+          n.dashify
+          "pages" bibinfo.check
+          *
+        }
+      if$
+    }
+  if$
+}
+
+FUNCTION {format.vol.num}
+{ volume field.or.null
+  duplicate$ empty$ 'skip$
+    {
+      "volume" bibinfo.check
+    }
+  if$
+  number "number" bibinfo.check duplicate$ empty$ 'skip$
+    {
+      swap$ duplicate$ empty$
+        { "there's a number but no volume in " cite$ * warning$ }
+        'skip$
+      if$
+      swap$
+      "(" swap$ * ")" *
+    }
+  if$ *
+}
+
+FUNCTION {format.vol.num.pages}
+{ volume field.or.null
+  duplicate$ empty$ 'skip$
+    {
+      "volume" bibinfo.check
+    }
+  if$
+  number "number" bibinfo.check duplicate$ empty$ 'skip$
+    {
+      swap$ duplicate$ empty$
+        { "there's a number but no volume in " cite$ * warning$ }
+        'skip$
+      if$
+      swap$
+      " (" swap$ * ")" *
+    }
+  if$ *
+  format.journal.pages
+}
+
+FUNCTION {format.chapter.pages}
+{ chapter empty$
+    'format.pages
+    { type empty$
+        { bbl.chapter }
+		{ type "l" change.case$
+		  "type" bibinfo.check
+		}
+	      if$
+	      chapter tie.or.space.prefix
+	      "chapter" bibinfo.check
+	      * *
+	      pages empty$
+		'skip$
+		{ ", " * format.pages * }
+	      if$
+	    }
+	  if$
+	}
+
+	FUNCTION {format.booktitle}
+	{
+	  booktitle "booktitle" bibinfo.check
+	}
+
+	FUNCTION {format.in.ed.booktitle}
+	{ format.booktitle duplicate$ empty$ 'skip$
+	    {
+	      editor "editor" format.names.ed duplicate$ empty$ 'pop$
+		{
+%		  "," *  %Removed Dec 17, 2019
+		  " " *
+		  get.bbl.editor
+		  ", " *
+		  * swap$
+		  * }
+	      if$
+	      word.in swap$ *
+	    }
+	  if$
+	}
+
+	FUNCTION {format.in.ed.title}
+	{ format.title duplicate$ empty$ 'skip$
+	    {
+	      editor "editor" format.names.ed duplicate$ empty$ 'pop$
+		{
+		  "," *
+		  " " *
+		  get.bbl.editor
+		  ", " *
+		  * swap$
+		  * }
+	      if$
+	      word.in swap$ *
+	    }
+	  if$
+	}
+
+	FUNCTION {empty.misc.check}
+	{ author empty$ title empty$ howpublished empty$
+	  month empty$ year empty$ note empty$
+	  and and and and and
+	    { "all relevant fields are empty in " cite$ * warning$ }
+	    'skip$
+	  if$
+	}
+FUNCTION {format.thesis.type}
+	{ type duplicate$ empty$
+	    'pop$
+	    { swap$ pop$
+	      "t" change.case$ "type" bibinfo.check
+    }
+  if$
+}
+FUNCTION {format.tr.number}
+{
+    number "number" bibinfo.check
+}
+
+%% 2019 Dec 17: changed order of publisher and address
+FUNCTION {format.org.or.pub}
+{ 't :=
+  ""
+  address empty$ t empty$ and
+    'skip$
+    {
+      t empty$
+        { address "address" bibinfo.check *
+        }
+        { t *
+          address empty$
+            'skip$
+            { ", " * address "address" bibinfo.check * }
+          if$
+        }
+      if$
+    }
+  if$
+}
+
+FUNCTION {format.publisher.address}
+{ publisher "publisher" bibinfo.warn
+  format.org.or.pub
+}
+
+FUNCTION {format.organization.address}
+{ organization "organization" bibinfo.check format.org.or.pub
+}
+
+FUNCTION {format.institution.address}
+{ institution "institution" bibinfo.check format.org.or.pub
+}
+FUNCTION {format.article.crossref}
+{
+  word.in
+  " \cite{" * crossref * "}" *
+}
+FUNCTION {format.book.crossref}
+{ volume duplicate$ empty$
+    { "empty volume in " cite$ * "'s crossref of " * crossref * warning$
+      pop$ word.in
+    }
+    { bbl.volume
+      capitalize
+      swap$ tie.or.space.prefix "volume" bibinfo.check * * bbl.of space.word *
+    }
+  if$
+  " \cite{" * crossref * "}" *
+}
+FUNCTION {format.incoll.inproc.crossref}
+{
+  word.in
+  " \cite{" * crossref * "}" *
+}
+FUNCTION {misc}
+{ output.bibitem
+  format.authors "author" output.check
+  date.block add.blank
+  format.date "year" output.check
+  new.block
+  format.editors output % "author and editor" output.check  %% IS OPTIONAL
+  format.title "title" output.check
+  new.block
+  format.publisher.address output
+  no.blank.or.punct add.blank
+  format.doi.url output
+  new.block
+  format.note output
+  fin.entry
+  empty.misc.check
+}
+
+FUNCTION{format.patent.number}
+{
+   location space.word bbl.patent * space.word number *
+}
+
+FUNCTION {patent}
+{ output.bibitem
+  format.authors "author" output.check
+  date.block add.blank
+  format.date "year" output.check
+  new.block
+  format.title "title" output.check
+  new.block
+  format.patent.number "location or number" output.check
+  new.block
+  format.note output
+  fin.entry
+}
+
+FUNCTION {format.accession.number}
+{ number empty$
+    { bbl.acc.number.none "(" swap$ * ")" * }
+    { bbl.acc.number "(" swap$ * space.word number * ")" * }
+  if$
+}
+
+FUNCTION {dataset}
+{ output.bibitem
+  format.authors "author" output.check
+  date.block add.blank
+  format.date "year" output.check
+  new.block
+  format.title "title" output.check
+  new.block
+  format.publisher.address output
+  no.blank.or.punct add.blank
+  format.doi.url output
+  no.blank.or.punct add.blank
+  format.accession.number "number" output.check
+  new.block
+  format.note output
+  fin.entry
+}
+
+FUNCTION {format.journal}
+{
+  "\JournalTitle{" journal * "}{}" *
+}
+
+FUNCTION {article}
+{ output.bibitem
+  format.authors "author" output.check
+  date.block add.blank
+  year empty$  %% Jan 2020: this is now optional
+    'skip$
+    {
+     format.journal.date output %"year" output.check
+     date.block add.blank
+    }
+  if$
+  organization empty$
+    'skip$
+    { author empty$
+        {
+          format.organizations "organization" output.check
+        }
+        {
+          "; " *
+           no.blank.or.punct
+          format.organizations "organization" output.check
+        }
+      if$
+    }
+  if$
+  new.block
+  format.title output % "title" output.check %% IS OPTIONAL
+  type missing$
+    { skip$ }
+    { "type" output.check }
+  if$
+  new.block
+  %%%%%% Mar 17, 2017 (LianTze) Abbreviates journal names
+  format.journal "journal" output.check
+  %%%%%% Jan 02, 2019 Now that year is optional: add "in press" if
+  %%%%%% year field is indeed missing.
+  year empty$
+    {
+      ", " * bbl.inpress *
+      date.block add.blank
+    }
+    { skip$ }
+  if$
+  no.blank.or.punct
+  add.blank
+  format.vol.num.pages output
+  new.block
+  format.doi.url output
+  new.block
+  format.note output
+  fin.entry
+}
+
+FUNCTION {format.conf.abstr.number}
+{
+  bbl.abstract space.word number *
+}
+
+FUNCTION {format.conf.booktitle}
+{
+  bbl.abstract "\MakeUppercase " swap$ *
+  " \JournalTitle{" * booktitle * "}" *
+}
+
+FUNCTION {format.conf.abstr.with.title}
+{
+  format.title output
+  format.conf.abstr.number "number" output.check
+  format.pages output
+  new.block
+  format.conf.booktitle "booktitle" output.check
+}
+
+FUNCTION {format.conf.abstr.without.title}
+{
+  format.conf.booktitle "booktitle" output.check
+  format.conf.abstr.number "number" output.check
+  format.pages output
+}
+
+FUNCTION {confabstract}
+{ output.bibitem
+  format.authors "author" output.check
+  date.block add.blank
+  format.date "year" output.check
+  date.block add.blank
+  title empty$
+    { format.conf.abstr.without.title }
+    { format.conf.abstr.with.title }
+  if$
+  new.block
+  publisher empty$
+    { format.organization.address output }
+    { organization "organization" bibinfo.check output
+      format.publisher.address output
+    }
+  if$
+  new.block
+  format.doi.url output
+  new.block
+  format.note output
+  fin.entry
+}
+
+FUNCTION {book}
+{ output.bibitem
+  author empty$
+    { editor empty$
+        { format.organizations "organization" output.check }
+        { format.editors "author and editor" output.check }
+      if$
+    }
+    { format.authors output.nonnull
+      "author and editor" editor either.or.check
+    }
+  if$
+  new.block
+  format.date "year" output.check
+  date.block add.blank
+  format.btitle "title" output.check
+  format.bvolume output
+  new.block
+  format.edition output
+  new.sentence
+  author empty$ not
+  editor empty$ not
+  and
+    { format.editors "author and editor" output.check }
+      'skip$
+  if$
+  format.number.series output
+  format.publisher.address output
+  %% format.date "year" output.check
+  new.block
+  format.doi.url output
+  new.block
+  format.note output
+  fin.entry
+}
+FUNCTION {booklet}
+{ misc }
+
+FUNCTION {dictionary}
+{ output.bibitem
+  format.booktitle "booktitle" output.check
+  format.bvolume output
+  new.block
+  format.edition output
+  new.sentence
+  format.publisher.address output
+  format.date "year" output.check
+  format.btitle "title" output.check
+  add.semicolon
+  add.blank
+  format.pages "pages" output.check
+  new.block
+  format.doi.url output
+  new.block
+  format.note output
+  fin.entry
+}
+
+FUNCTION {inbook}
+{ output.bibitem
+  format.authors "author" output.check
+  date.block add.blank
+  format.date "year" output.check
+  date.block
+  add.blank
+  chapter "chapter" output.check
+  new.block
+  format.in.ed.title "title" output.check
+  format.bvolume output
+  format.edition output
+  new.sentence
+  format.number.series output
+  format.publisher.address output
+%%%  format.date "year" output.check
+%%%  date.block
+%%%  add.blank
+  format.pages "pages" output.check
+  new.block
+  format.doi.url output
+  new.block
+  format.note output
+  fin.entry
+}
+
+FUNCTION {incollection}
+{ output.bibitem
+  format.authors "author" output.check
+  date.block add.blank
+  year empty$
+    'skip$
+    {
+      format.date output %"year" output.check  %% now optional
+      date.block
+      add.blank
+    }
+  if$
+  format.title output % "title" output.check   %% IS OPTIONAL
+  format.pages output % "pages" output.check   %% IS OPTIONAL
+  new.block
+  format.in.ed.booktitle "booktitle" output.check
+  format.edition output
+  format.bvolume output
+  %%%%%% Jan 02, 2019 Now that year is optional: add "in press" if
+  %%%%%% year field is indeed missing.
+  year empty$
+    {
+      ", " * bbl.inpress *
+      date.block add.blank
+    }
+    { skip$ }
+  if$
+%%%  new.sentence %% Modified 2019, Dec 17
+  new.block
+  format.number.series output
+  format.publisher.address output
+  new.block
+  format.doi.url output
+  new.block
+  format.note output
+  fin.entry
+}
+FUNCTION {inproceedings}
+{ output.bibitem
+  format.authors "author" output.check
+  date.block add.blank
+  format.date "year" output.check
+  date.block add.blank
+  format.title "title" output.check
+  new.block
+  format.in.ed.booktitle "booktitle" output.check
+  format.bvolume output
+  new.sentence
+  format.number.series output
+  publisher empty$
+    { format.organization.address output }
+    { organization "organization" bibinfo.check output
+      format.publisher.address output
+    }
+  if$
+%%%  format.date "year" output.check
+%%%  date.block
+%%%  add.blank
+  format.pages "pages" output.check
+  new.block
+  format.doi.url output
+  new.block
+  format.note output
+  fin.entry
+}
+FUNCTION {conference} { inproceedings }
+FUNCTION {manual}
+{ output.bibitem
+  format.authors output
+  author format.key output
+%%%  add.colon
+  new.block
+  format.date "year" output.check
+  date.block add.blank new.block
+  format.btitle "title" output.check
+  organization address new.block.checkb
+  organization "organization" bibinfo.check output
+  address "address" bibinfo.check output
+  format.edition output
+  % format.date "year" output.check
+  new.block
+  format.doi.url output
+  new.block
+  format.note output
+  fin.entry
+}
+
+FUNCTION {phdthesis}
+{ output.bibitem
+  format.authors "author" output.check
+  date.block add.blank
+  format.date "year" output.check
+  date.block add.blank
+  format.btitle output %"title" output.check  %% IS OPTIONAL
+  new.block
+  "PhD thesis" format.thesis.type output.nonnull
+  new.block
+  school "school" bibinfo.warn output
+  address "address" bibinfo.check output
+%%%  format.date "year" output.check
+  new.block
+  format.doi.url output
+  new.block
+  format.note output
+  fin.entry
+}
+
+FUNCTION {proceedings}
+{ output.bibitem
+  format.editors output
+  editor format.key output
+%%%  add.colon
+  new.block
+  format.date "year" output.check
+  date.block add.blank
+  format.btitle "title" output.check
+  format.bvolume output
+  new.sentence
+  format.number.series output
+  publisher empty$
+    { format.organization.address output }
+    { organization "organization" bibinfo.check output
+      format.publisher.address output
+    }
+  if$
+%%%  format.date "year" output.check
+  % new.block       ++++ REMOVED (to get comma before note)
+  format.doi.url output
+  new.block
+  format.note output
+  fin.entry
+}
+
+FUNCTION {techreport}
+{ output.bibitem
+  format.authors "author" output.check
+  date.block add.blank
+  format.date "year" output.check
+  date.block add.blank
+  format.title
+  "title" output.check
+  new.block
+  format.institution.address output
+%%%  format.date "year" output.check
+%%%  format.tr.number output.nonnull
+  new.block
+  format.note output
+  fin.entry
+}
+
+FUNCTION {unpublished}
+{ output.bibitem
+  format.authors "author" output.check
+  author format.key output
+%%%  add.colon
+  new.block
+  format.date "year" output.check
+  date.block add.blank
+  format.title "title" output.check
+%%%  format.date "year" output.check
+  % new.block       ++++ REMOVED (to get comma before note)
+  format.note "note" output.check
+  fin.entry
+}
+
+FUNCTION {default.type} { misc }
+READ
+FUNCTION {sortify}
+{ purify$
+  "l" change.case$
+}
+INTEGERS { len }
+FUNCTION {chop.word}
+{ 's :=
+  'len :=
+  s #1 len substring$ =
+    { s len #1 + global.max$ substring$ }
+    's
+  if$
+}
+FUNCTION {format.lab.names}
+{ 's :=
+  "" 't :=
+  s #1 "{vv~}{ll}" format.name$
+  s num.names$ duplicate$
+  #2 >
+    { pop$
+      " " * bbl.etal *
+    }
+    { #2 <
+        'skip$
+        { s #2 "{ff }{vv }{ll}{ jj}" format.name$ "others" =
+            {
+              " " * bbl.etal *
+            }
+            { bbl.and space.word * s #2 "{vv~}{ll}" format.name$
+              * }
+          if$
+        }
+      if$
+    }
+  if$
+}
+
+FUNCTION {author.key.label}
+{ author empty$
+    { key empty$
+        { cite$ #1 #3 substring$ }
+        'key
+      if$
+    }
+    { author format.lab.names }
+  if$
+}
+
+FUNCTION {author.editor.key.label}
+{ author empty$
+    { editor empty$
+        { key empty$
+            { cite$ #1 #3 substring$ }
+            'key
+          if$
+        }
+        { editor format.lab.names }
+      if$
+    }
+    { author format.lab.names }
+  if$
+}
+
+FUNCTION {editor.key.label}
+{ editor empty$
+    { key empty$
+        { cite$ #1 #3 substring$ }
+        'key
+      if$
+    }
+    { editor format.lab.names }
+  if$
+}
+
+FUNCTION {calc.short.authors}
+{ type$ "book" =
+  type$ "inbook" =
+  or
+    'author.editor.key.label
+    { type$ "proceedings" =
+        'editor.key.label
+        'author.key.label
+      if$
+    }
+  if$
+  'short.list :=
+}
+
+FUNCTION {calc.label}
+{ calc.short.authors
+  short.list
+  "("
+  *
+  year duplicate$ empty$
+     { pop$ "????" }
+     'skip$
+  if$
+  *
+  'label :=
+}
+
+FUNCTION {sort.format.names}
+{ 's :=
+  #1 'nameptr :=
+  ""
+  s num.names$ 'numnames :=
+  numnames 'namesleft :=
+    { namesleft #0 > }
+    { s nameptr
+      "{ll{ }}{  ff{ }}{  jj{ }}"
+      format.name$ 't :=
+      nameptr #1 >
+        {
+          "   "  *
+          namesleft #1 = t "others" = and
+            { "zzzzz" * }
+            { t sortify * }
+          if$
+        }
+        { t sortify * }
+      if$
+      nameptr #1 + 'nameptr :=
+      namesleft #1 - 'namesleft :=
+    }
+  while$
+}
+
+FUNCTION {sort.format.title}
+{ 't :=
+  "A " #2
+    "An " #3
+      "The " #4 t chop.word
+    chop.word
+  chop.word
+  sortify
+  #1 global.max$ substring$
+}
+FUNCTION {author.sort}
+{ author empty$
+    { key empty$
+        { "to sort, need author or key in " cite$ * warning$
+          ""
+        }
+        { key sortify }
+      if$
+    }
+    { author sort.format.names }
+  if$
+}
+FUNCTION {author.editor.sort}
+{ author empty$
+    { editor empty$
+        { key empty$
+            { "to sort, need author, editor, or key in " cite$ * warning$
+              ""
+            }
+            { key sortify }
+          if$
+        }
+        { editor sort.format.names }
+      if$
+    }
+    { author sort.format.names }
+  if$
+}
+FUNCTION {editor.sort}
+{ editor empty$
+    { key empty$
+        { "to sort, need editor or key in " cite$ * warning$
+          ""
+        }
+        { key sortify }
+      if$
+    }
+    { editor sort.format.names }
+  if$
+}
+FUNCTION {presort}
+{ calc.label
+  label sortify
+  "    "
+  *
+  type$ "book" =
+  type$ "inbook" =
+  or
+    'author.editor.sort
+    { type$ "proceedings" =
+        'editor.sort
+        'author.sort
+      if$
+    }
+  if$
+  #1 entry.max$ substring$
+  'sort.label :=
+  sort.label
+  *
+  "    "
+  *
+  title field.or.null
+  sort.format.title
+  *
+  #1 entry.max$ substring$
+  'sort.key$ :=
+}
+
+ITERATE {presort}
+%SORT
+STRINGS { last.label next.extra }
+INTEGERS { last.extra.num number.label }
+FUNCTION {initialize.extra.label.stuff}
+{ #0 int.to.chr$ 'last.label :=
+  "" 'next.extra :=
+  #0 'last.extra.num :=
+  #0 'number.label :=
+}
+FUNCTION {forward.pass}
+{ last.label label =
+    { last.extra.num #1 + 'last.extra.num :=
+      last.extra.num int.to.chr$ 'extra.label :=
+    }
+    { "a" chr.to.int$ 'last.extra.num :=
+      "" 'extra.label :=
+      label 'last.label :=
+    }
+  if$
+  number.label #1 + 'number.label :=
+}
+FUNCTION {reverse.pass}
+{ next.extra "b" =
+    { "a" 'extra.label := }
+    'skip$
+  if$
+  extra.label 'next.extra :=
+  extra.label
+  duplicate$ empty$
+    'skip$
+    { "{\natexlab{" swap$ * "}}" * }
+  if$
+  'extra.label :=
+  label extra.label * 'label :=
+}
+%EXECUTE {initialize.extra.label.stuff}
+%ITERATE {forward.pass}
+%REVERSE {reverse.pass}
+FUNCTION {bib.sort.order}
+{ sort.label
+  "    "
+  *
+  year field.or.null sortify
+  *
+  "    "
+  *
+  title field.or.null
+  sort.format.title
+  *
+  #1 entry.max$ substring$
+  'sort.key$ :=
+}
+%%% ITERATE {bib.sort.order}
+%%% SORT
+FUNCTION {begin.bib}
+{ preamble$ empty$
+    'skip$
+    { preamble$ write$ newline$ }
+  if$
+  "\begin{thebibliography}{" number.label int.to.str$ * "}" *
+  write$ newline$
+  "\providecommand{\natexlab}[1]{#1}"
+  write$ newline$
+  "\providecommand{\url}[1]{\texttt{#1}}"
+  write$ newline$
+  "\providecommand{\urlprefix}{}"
+  write$ newline$
+  "\providecommand{\doiprefix}{doi:\allowbreak}"
+  write$ newline$
+  "\providecommand{\doi}[1]{\href{https://doi.org/#1}{\detokenize{#1}}}"
+  write$ newline$
+}
+EXECUTE {begin.bib}
+EXECUTE {init.state.consts}
+ITERATE {call.type$}
+FUNCTION {end.bib}
+{ newline$
+  "\end{thebibliography}" write$ newline$
+}
+EXECUTE {end.bib}
+%% End of customized bst file
+%%
+%% End of file `splncsnat.bst'.
+%</bibstyle>
+%%%    \end{macrocode}
+%
+%%% This brings us to the end of \file{asm.bst}.
+%
+%%% \subsection{asm Endfloat Configuration File}
+%
+%%%    \begin{macrocode}
+%
+%<*enfconfig>
+
+<Insert Config file content>
+
+%</enfconfig>
+%%%    \end{macrocode}
+%
+%%% This brings us to the end of \file{asmenf.cfg}.
+%
+%%% \Finale
+%
